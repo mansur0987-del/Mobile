@@ -14,7 +14,7 @@ struct ContentView: View {
 	var content = [Content(id: 0, content: "Currently"),
 				Content(id: 1, content: "Today"),
 				Content(id: 2, content: "Weekly")]
-    var body: some View {
+	var body: some View {
 		GeometryReader { geometry in
 			@State var width : CGFloat = geometry.size.width
 			@State var height : CGFloat = geometry.size.height
@@ -51,11 +51,11 @@ struct ContentView: View {
 			
 		}
 		.preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
-    }
+	}
 }
 
 #Preview {
-    ContentView()
+	ContentView()
 }
 
 struct AppBar: View {
