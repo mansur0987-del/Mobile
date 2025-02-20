@@ -7,6 +7,30 @@
 
 import SwiftUI
 
+struct ButtonBar: View {
+	@Binding var IdActiveButton : Int
+	var body: some View {
+		GeometryReader {geometry in
+			@State var width : CGFloat = geometry.size.width
+			@State var height : CGFloat = geometry.size.height
+			HStack {
+				ButtonCurrently(IdActiveButton : $IdActiveButton)
+					.frame(width: width * 0.3)
+				Spacer()
+				ButtonToday(IdActiveButton : $IdActiveButton)
+					.frame(width: width * 0.3)
+				Spacer()
+				ButtonWeekly(IdActiveButton : $IdActiveButton)
+					.frame(width: width * 0.3)
+			}
+			.frame(width: width * 0.9)
+			.padding()
+			.background(Color.gray.tertiary)
+			.clipShape(RoundedRectangle(cornerRadius: 30))
+		}
+	}
+}
+
 struct ButtonCurrently: View {
 	@Binding var IdActiveButton : Int
 	var body: some View {
