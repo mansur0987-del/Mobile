@@ -18,11 +18,11 @@ struct ContentView: View {
 	
 	var body: some View {
 		GeometryReader { geometry in
-			@State var width : CGFloat = geometry.size.width
-			@State var height : CGFloat = geometry.size.height
-			@State var isPortrait : Bool = height > width
+			let width : CGFloat = geometry.size.width
+			let height : CGFloat = geometry.size.height
+			let isPortrait : Bool = height > width
 			VStack {
-				AppBar(locationManager: locationManager, location: $location, isPortrait: $isPortrait)
+				AppBar(locationManager: locationManager, location: $location, isPortrait: isPortrait)
 					.frame(width: width, height: height * 0.05)
 					.padding()
 								

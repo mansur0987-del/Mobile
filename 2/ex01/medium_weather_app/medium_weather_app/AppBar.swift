@@ -10,10 +10,10 @@ import SwiftUI
 struct AppBar: View {
 	@ObservedObject var locationManager : LocationManager
 	@Binding var location : Location
-	@Binding var isPortrait : Bool
+	var isPortrait : Bool
 	var body: some View {
 		HStack {
-			SearchField(location: $location, isPortrait: $isPortrait)
+			SearchField(location: $location, isPortrait: isPortrait)
 			Spacer()
 			ButtonGPS(locationManager: locationManager, location: $location)
 		}
@@ -24,7 +24,7 @@ struct SearchField: View {
 	@State var isDropdownVisible = false
 	@State var options : [SearchData] = []
 	@Binding var location : Location
-	@Binding var isPortrait : Bool
+	var isPortrait : Bool
 	var network = Network()
 	
 	var body: some View {
@@ -55,7 +55,7 @@ struct SearchField: View {
 			}
 			.overlay {
 				if isDropdownVisible {
-					DropdownList(isDropdownVisible: $isDropdownVisible, isPortrait: $isPortrait, options : $options, location: $location)
+					DropdownList(isDropdownVisible: $isDropdownVisible, isPortrait: isPortrait, options : $options, location: $location)
 				}
 			}
 	}
@@ -63,7 +63,7 @@ struct SearchField: View {
 
 struct DropdownList : View {
 	@Binding var isDropdownVisible : Bool
-	@Binding var isPortrait : Bool
+	var isPortrait : Bool
 	@Binding var options : [SearchData]
 	@Binding var location : Location
 	var body: some View {
