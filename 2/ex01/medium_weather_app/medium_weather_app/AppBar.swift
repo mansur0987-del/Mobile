@@ -97,6 +97,7 @@ struct DropdownListText : View {
 				location.location = CollectName(line_1: option.admin1, line_2: option.admin2, line_3: option.admin3, line_4: option.admin4, country: option.country)
 				location.latitude = option.latitude
 				location.longitude = option.longitude
+				location.IsErrorSearch = false
 				isDropdownVisible = false
 				location.IsGPS = false
 			}

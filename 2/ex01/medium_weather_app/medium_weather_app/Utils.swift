@@ -28,15 +28,20 @@ func CollectName(line_1: String?, line_2: String?, line_3: String?, line_4: Stri
 }
 
 func FindOneSearchResult(options: [SearchData], location: Location) -> Location {
-	if options.count == 1 {
+	var location = location
+	if options.count > 0 {
 		let option = options[0]
-		var location = location
 		
 		location.location = CollectName(line_1: option.admin1, line_2: option.admin2, line_3: option.admin3, line_4: option.admin4, country: option.country)
 		location.latitude = option.latitude
 		location.longitude = option.longitude
+		location.IsErrorSearch = false
 		return location
 	}
+	location.latitude = nil
+	location.longitude = nil
+	location.IsErrorSearch = true
+	location.errorSearch = "Location did not find"
 	return location
 }
 
