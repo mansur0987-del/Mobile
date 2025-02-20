@@ -25,7 +25,7 @@ struct ContentView: View {
 					.frame(width: width, height: height * 0.05)
 					.padding()
 								
-				TextPlace(IdActiveButton : $IdActiveButton, location: $location, content: content)
+				TextPlace(IdActiveButton : $IdActiveButton, location: $location, locationManager: locationManager, content: content)
 					.font(.largeTitle)
 					.frame(width: width, height: height > width ? height * 0.7 : height * 0.6)
 					.contentShape(Rectangle())
@@ -48,9 +48,11 @@ struct ContentView: View {
 					}
 				}
 			)
-			
 		}
 		.preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
+		.task {
+			locationManager.requestLocation()
+		}
 	}
 }
 
@@ -61,6 +63,7 @@ struct ContentView: View {
 struct AppBar: View {
 	@ObservedObject var locationManager : LocationManager
 	@Binding var location : Location
+	@State var IsLoading : Bool = false
 	var body: some View {
 		HStack {
 			TextField("Location", text: $location.location)
@@ -74,30 +77,7 @@ struct AppBar: View {
 				}
 			
 			Spacer()
-			Button(action: {
-				Task {
-					location.location = ""
-					location.IsErrorGPS = false
-					locationManager.requestLocation()
-					try await Task.sleep(nanoseconds: UInt64(2) * NSEC_PER_SEC)
-					if locationManager.error != nil {
-						location.IsErrorGPS = true
-						location.errorGPS = locationManager.error!
-					}
-					else {
-						location.latitude = locationManager.latitude
-						location.longitude = locationManager.longitude
-					}
-					location.IsGPS = true
-				}
-				}, label: {
-				Image(systemName: "location")
-					.foregroundStyle(.gray)
-			})
-			.padding()
-			.task {
-				locationManager.requestLocation()
-			}
+			ButtonGPS(locationManager: locationManager, location: $location)
 		}
 		
 	}
@@ -106,18 +86,19 @@ struct AppBar: View {
 struct TextPlace: View {
 	@Binding var IdActiveButton : Int
 	@Binding var location : Location
+	@ObservedObject var locationManager : LocationManager
 	var content : [Content]
 	var body: some View {
 		VStack {
 			if location.IsGPS == true {
-				if location.IsErrorGPS {
-					Text(location.errorGPS!)
+				if locationManager.error != nil {
+					Text(locationManager.error!)
 						.font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
 						.foregroundStyle(.red)
 				}
-				else {
+				else if locationManager.latitude != nil , locationManager.longitude != nil {
 					Text(content[IdActiveButton].content)
-					Text(String(location.latitude!) + " " + String(location.longitude!))
+					Text(String(locationManager.latitude!) + " " + String(locationManager.longitude!))
 				}
 			}
 			else {
@@ -135,6 +116,22 @@ struct TextPlace: View {
 	}
 }
 
+struct ButtonGPS: View {
+	@ObservedObject var locationManager : LocationManager
+	@Binding var location : Location
+	var body: some View {
+		Button(action: {
+			Task {
+				locationManager.requestLocation()
+				location.IsGPS = true
+			}
+		}, label: {
+			Image(systemName: "location")
+				.foregroundStyle(.gray)
+		})
+		.padding()
+	}
+}
 
 struct ButtonBar: View {
 	@Binding var IdActiveButton : Int
@@ -143,54 +140,14 @@ struct ButtonBar: View {
 			@State var width : CGFloat = geometry.size.width
 			@State var height : CGFloat = geometry.size.height
 			HStack {
-				Button(action: {
-					IdActiveButton = 0
-				}, label: {
-					VStack {
-						Image(systemName: "timer")
-							.foregroundStyle(.gray)
-						Text("Currently")
-							.foregroundStyle(.gray)
-					}
-					.font(.callout)
-					.padding()
-					.background(IdActiveButton == 0 ? Color.black : Color.clear)
-					.clipShape(RoundedRectangle(cornerRadius: 30))
-				})
-				.frame(width: width * 0.3)
+				ButtonCurrently(IdActiveButton : $IdActiveButton)
+					.frame(width: width * 0.3)
 				Spacer()
-				Button(action: {
-					IdActiveButton = 1
-				}, label: {
-					VStack {
-						Image(systemName: "calendar")
-							.foregroundStyle(.gray)
-						Text("Today")
-							.foregroundStyle(.gray)
-					}
-					.font(.callout)
-					.padding()
-					.background(IdActiveButton == 1 ? Color.black : Color.clear)
-					.clipShape(RoundedRectangle(cornerRadius: 30))
-				})
-				.frame(width: width * 0.3)
+				ButtonToday(IdActiveButton : $IdActiveButton)
+					.frame(width: width * 0.3)
 				Spacer()
-				
-				Button(action: {
-					IdActiveButton = 2
-				}, label: {
-					VStack {
-						Image(systemName: "calendar.badge.plus")
-							.foregroundStyle(.gray)
-						Text("Weekly")
-							.foregroundStyle(.gray)
-					}
-					.font(.callout)
-					.padding()
-					.background(IdActiveButton == 2 ? Color.black : Color.clear)
-					.clipShape(RoundedRectangle(cornerRadius: 30))
-				})
-				.frame(width: width * 0.3)
+				ButtonWeekly(IdActiveButton : $IdActiveButton)
+					.frame(width: width * 0.3)
 			}
 			.frame(width: width * 0.9)
 			.padding()
@@ -199,3 +156,4 @@ struct ButtonBar: View {
 		}
 	}
 }
+
