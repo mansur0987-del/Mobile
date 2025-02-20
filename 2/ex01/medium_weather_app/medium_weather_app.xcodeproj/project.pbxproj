@@ -14,6 +14,8 @@
 		60000C9C2D6624CC00CDE862 /* GPS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000C9B2D6624CC00CDE862 /* GPS.swift */; };
 		60000C9E2D6624EC00CDE862 /* Interfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000C9D2D6624EC00CDE862 /* Interfaces.swift */; };
 		60000CA02D66779000CDE862 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000C9F2D66779000CDE862 /* API.swift */; };
+		60000CA42D6746E100CDE862 /* ButtonBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000CA32D6746E100CDE862 /* ButtonBar.swift */; };
+		60000CA62D67572700CDE862 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60000CA52D67572700CDE862 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		60000C9B2D6624CC00CDE862 /* GPS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPS.swift; sourceTree = "<group>"; };
 		60000C9D2D6624EC00CDE862 /* Interfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interfaces.swift; sourceTree = "<group>"; };
 		60000C9F2D66779000CDE862 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		60000CA32D6746E100CDE862 /* ButtonBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonBar.swift; sourceTree = "<group>"; };
+		60000CA52D67572700CDE862 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,8 @@
 				60000C9B2D6624CC00CDE862 /* GPS.swift */,
 				60000C9D2D6624EC00CDE862 /* Interfaces.swift */,
 				60000C9F2D66779000CDE862 /* API.swift */,
+				60000CA32D6746E100CDE862 /* ButtonBar.swift */,
+				60000CA52D67572700CDE862 /* Utils.swift */,
 			);
 			path = medium_weather_app;
 			sourceTree = "<group>";
@@ -149,8 +155,10 @@
 				60000C902D66249500CDE862 /* ContentView.swift in Sources */,
 				60000C8E2D66249500CDE862 /* medium_weather_appApp.swift in Sources */,
 				60000C9C2D6624CC00CDE862 /* GPS.swift in Sources */,
+				60000CA62D67572700CDE862 /* Utils.swift in Sources */,
 				60000C9E2D6624EC00CDE862 /* Interfaces.swift in Sources */,
 				60000CA02D66779000CDE862 /* API.swift in Sources */,
+				60000CA42D6746E100CDE862 /* ButtonBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

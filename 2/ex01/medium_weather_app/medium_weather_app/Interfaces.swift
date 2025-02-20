@@ -42,7 +42,7 @@ struct ResultSearch : Decodable {
 	var results : [SearchData]?
 }
 
-struct SearchData : Decodable {
+struct SearchData : Decodable, Hashable {
 	var id : Int
 	var admin1 : String?
 	var admin2 : String?

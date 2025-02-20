@@ -17,7 +17,7 @@ enum NetworkError: Error {
 }
 
 class Network : ObservableObject {
-	func Search(line : String) async throws -> ResultSearch {
+	func Search(line : String) async throws -> [SearchData] {
 		print("func Search city")
 		guard let url = URL(string: "https://geocoding-api.open-meteo.com/v1/search?name=" + line)
 		else { throw NetworkError.invalidUrl }
@@ -28,7 +28,7 @@ class Network : ObservableObject {
 		guard (response as? HTTPURLResponse)?.statusCode == 200
 		else { throw NetworkError.invalidResponse(code_error: (response as? HTTPURLResponse)?.statusCode ?? 500)}
 		if let result_search = try? JSONDecoder().decode(ResultSearch.self, from: data){
-			return result_search
+			return result_search.results ?? []
 		}
 		throw NetworkError.serverError
 	}
