@@ -52,6 +52,16 @@ struct SearchField: View {
 				location = FindOneSearchResult(options: options, location: location)
 				isDropdownVisible = false
 				location.IsGPS = false
+				if location.latitude != nil, location.longitude != nil {
+					Task {
+						do {
+							try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!)
+						}
+						catch {
+							print("Error: ", error)
+						}
+					}
+				}
 			}
 			.overlay {
 				if isDropdownVisible {
@@ -79,7 +89,7 @@ struct DropdownList : View {
 				.cornerRadius(8)
 				.shadow(radius: 5)
 			}
-			.offset(y: isPortrait ? height : height * 0.5)
+			.offset(y: isPortrait ? height * 0.5 : height * 0.5)
 		}
 
 		
@@ -87,6 +97,7 @@ struct DropdownList : View {
 }
 
 struct DropdownListText : View {
+	var network = Network()
 	@State var option : SearchData
 	@Binding var isDropdownVisible : Bool
 	@Binding var location : Location
@@ -95,11 +106,20 @@ struct DropdownListText : View {
 			.frame(maxWidth: .infinity, alignment: .leading)
 			.onTapGesture {
 				location.location = ""
+				location.final_location = CollectName(line_1: option.admin1, line_2: option.admin2, line_3: option.admin3, line_4: option.admin4, country: option.country)
 				location.latitude = option.latitude
 				location.longitude = option.longitude
 				location.IsErrorSearch = false
 				isDropdownVisible = false
 				location.IsGPS = false
+				Task {
+					do {
+						try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!)
+					}
+					catch {
+						print("Error: ", error)
+					}
+				}
 			}
 			.foregroundStyle(Color.gray)
 			.listRowBackground(Color(UIColor(red: 99/255, green: 99/255, blue: 99/255, alpha: 1)))
@@ -108,13 +128,23 @@ struct DropdownListText : View {
 }
 
 struct ButtonGPS: View {
+	var network = Network()
 	@ObservedObject var locationManager : LocationManager
 	@Binding var location : Location
 	var body: some View {
 		Button(action: {
 			Task {
+				print("GPS")
 				locationManager.requestLocation()
 				location.IsGPS = true
+				if locationManager.latitude != nil , locationManager.longitude != nil {
+					do {
+						try await network.GetWeather(latitude: locationManager.latitude!, longitude: locationManager.longitude!)
+					}
+					catch {
+						print("Error: ", error)
+					}
+				}
 			}
 		}, label: {
 			Image(systemName: "location")

@@ -18,8 +18,9 @@ struct Content : Codable {
 }
 
 struct Location : Codable {
-	var IsGPS : Bool = false
+	var IsGPS : Bool = true
 	var location : String = ""
+	var final_location : String = ""
 	var latitude : Double?
 	var longitude : Double?
 	var IsErrorGPS : Bool = false

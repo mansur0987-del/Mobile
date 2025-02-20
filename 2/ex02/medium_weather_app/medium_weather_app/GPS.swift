@@ -13,17 +13,20 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	
 	@Published var latitude: Double?
 	@Published var longitude: Double?
+	@Published var location: String?
 	@Published var error : String?
 	
 	override init() {
 		super.init()
 		self.locationManager.delegate = self
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+		locationManager.requestWhenInUseAuthorization()
+		locationManager.startUpdatingLocation()
 	}
 	
 	func requestLocation() {
-		self.error = nil
-		self.locationManager.requestWhenInUseAuthorization()
-		self.locationManager.requestLocation()
+		locationManager.requestWhenInUseAuthorization()
+		locationManager.requestLocation()
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -32,6 +35,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 			self.latitude = location.coordinate.latitude
 			self.longitude = location.coordinate.longitude
 		}
+		fetchLocationName(from: location)
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -43,6 +47,17 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 				self.error = "Couldn't determine location."
 			default:
 				self.error = "Error: \(clError.localizedDescription)"
+			}
+		}
+	}
+	
+	func fetchLocationName(from location: CLLocation) {
+		let geocoder = CLGeocoder()
+		geocoder.reverseGeocodeLocation(location) { placemarks, error in
+			guard let placemark = placemarks?.first, error == nil else { return }
+			
+			DispatchQueue.main.async {
+				self.location = CollectName(line_1: placemark.locality, line_2: placemark.administrativeArea, line_3: nil, line_4: nil, country: placemark.country)
 			}
 		}
 	}

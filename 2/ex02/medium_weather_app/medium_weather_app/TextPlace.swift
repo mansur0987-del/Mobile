@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TextPlace: View {
+	var network = Network()
 	@Binding var IdActiveButton : Int
 	@Binding var location : Location
 	@ObservedObject var locationManager : LocationManager
@@ -15,14 +16,17 @@ struct TextPlace: View {
 	var body: some View {
 		VStack {
 			if location.IsGPS == true {
-				if locationManager.error != nil {
+				if locationManager.latitude != nil , locationManager.longitude != nil {
+					Text(locationManager.location ?? "")
+					Text(String(locationManager.latitude!) + " " + String(locationManager.longitude!))
+				}
+				else if locationManager.error != nil {
 					Text(locationManager.error!)
 						.font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
 						.foregroundStyle(.red)
 				}
-				else if locationManager.latitude != nil , locationManager.longitude != nil {
-					Text(content[IdActiveButton].content)
-					Text(String(locationManager.latitude!) + " " + String(locationManager.longitude!))
+				else {
+					Text("11111")
 				}
 			}
 			else {
@@ -32,7 +36,7 @@ struct TextPlace: View {
 						.foregroundStyle(.red)
 				}
 				else {
-					Text(content[IdActiveButton].content)
+					Text(location.final_location)
 					if location.latitude != nil, location.longitude != nil {
 						Text(String(location.latitude!) + " " + String(location.longitude!))
 					}
