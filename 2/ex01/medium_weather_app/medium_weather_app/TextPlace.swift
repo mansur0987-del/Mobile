@@ -33,7 +33,9 @@ struct TextPlace: View {
 				}
 				else {
 					Text(content[IdActiveButton].content)
-					Text(location.location)
+					if location.latitude != nil, location.longitude != nil {
+						Text(String(location.latitude!) + " " + String(location.longitude!))
+					}
 				}
 			}
 		}
