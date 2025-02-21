@@ -21,22 +21,22 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 		self.locationManager.delegate = self
 		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 		locationManager.requestWhenInUseAuthorization()
-		locationManager.requestLocation()
+		locationManager.startUpdatingLocation()
 	}
 	
 	func requestLocation() {
-		locationManager.requestWhenInUseAuthorization()
 		locationManager.requestLocation()
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		self.error = nil
 		guard let location = locations.last else { return }
 		DispatchQueue.main.async {
-			self.error = nil
 			self.latitude = location.coordinate.latitude
 			self.longitude = location.coordinate.longitude
-			self.fetchLocationName(from: location)
 		}
+		fetchLocationName(from: location)
+		
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

@@ -29,7 +29,7 @@ struct Location : Codable {
 	var daily : [DailyWeather] = []
 	var week : [WeekWeather] = []
 	
-	init(IsGPS: Bool, latitude: Double? = nil, longitude: Double? = nil, errorGPS: String? = nil, errorSearch: String? = nil) {
+	init(IsGPS: Bool, latitude: Double? = nil, longitude: Double? = nil, IsErrorGPS: Bool, errorGPS: String? = nil, IsErrorSearch: Bool, errorSearch: String? = nil) {
 		self.IsGPS = IsGPS
 		self.latitude = latitude
 		self.longitude = longitude

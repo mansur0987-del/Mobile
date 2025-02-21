@@ -38,7 +38,6 @@ struct SearchField: View {
 					Task {
 						do {
 							options = try await network.Search(line: newValue)
-							location.errorSearch = location.errorSearch == "Network error. Check internet connection" ? "" : location.errorSearch
 						}
 						catch {
 							location.errorSearch = "Network error. Check internet connection"
@@ -135,10 +134,9 @@ struct ButtonGPS: View {
 	var body: some View {
 		Button(action: {
 			Task {
-				print("request GPS")
+				print("GPS")
 				locationManager.requestLocation()
 				location.IsGPS = true
-				
 			}
 		}, label: {
 			Image(systemName: "location")

@@ -52,12 +52,8 @@ class Network : ObservableObject {
 		urlRequest.httpMethod = "GET"
 		
 		let responses = try await WeatherApiResponse.fetch(url: url)
-		if responses.count == 0 {
-			throw NetworkError.serverError
-		}
-		
 		let response = responses[0]
-				
+		
 		/// Attributes for timezone and location
 		let utcOffsetSeconds = response.utcOffsetSeconds
 		_ = response.timezone

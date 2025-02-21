@@ -10,7 +10,7 @@ import CoreLocation
 
 struct ContentView: View {
 	@StateObject var locationManager = LocationManager()
-	@State var location : Location = Location(IsGPS: true)
+	@State var location : Location = Location(IsGPS: true, IsErrorGPS: false, IsErrorSearch: false)
 	@State var IdActiveButton : Int = 0
 	var body: some View {
 		GeometryReader { geometry in
@@ -32,6 +32,7 @@ struct ContentView: View {
 			}
 			.frame(minWidth: width * 0.9, maxWidth: width, minHeight: height * 0.9, maxHeight: height)
 			.padding()
+			
 			.gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
 				.onEnded { value in
 					switch(value.translation.width, value.translation.height) {
@@ -44,9 +45,7 @@ struct ContentView: View {
 		}
 		.preferredColorScheme(/*@START_MENU_TOKEN@*/.dark/*@END_MENU_TOKEN@*/)
 		.task {
-			print("request GPS")
 			locationManager.requestLocation()
-			location.IsGPS = true
 		}
 	}
 }

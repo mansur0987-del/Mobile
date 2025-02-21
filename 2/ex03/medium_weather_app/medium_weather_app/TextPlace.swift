@@ -16,27 +16,26 @@ struct TextPlace: View {
 	var body: some View {
 		VStack {
 			if location.IsGPS == true {
-				if locationManager.latitude != nil {
-					Text(locationManager.location ?? "")
-					.task {
-						location = LocationWaetherClean(location: location)
-						do {
-							location.errorGPS = ""
-							location = try await network.GetWeather(latitude: locationManager.latitude!, longitude: locationManager.longitude!, location: location)
-						}
-						catch {
-							locationManager.latitude = nil
-							locationManager.longitude = nil
-							location.errorSearch = "Network error. Check internet connection"
-							location.errorGPS = "Network error. Check internet connection"
-						}
-					}
-				}
-				else {
-					Text(locationManager.error ?? location.errorGPS != "" ? location.errorGPS : "GPS Error" )
+				if locationManager.error != nil {
+					Text(locationManager.error!)
 					.foregroundStyle(.red)
 					.task {
 						location = LocationWaetherClean(location: location)
+						locationManager.location = nil
+					}
+				}
+				else if locationManager.location != nil {
+					Text(locationManager.location ?? "")
+					.task {
+						do {
+							location = try await network.GetWeather(latitude: locationManager.latitude!, longitude: locationManager.longitude!, location: location)
+						}
+						catch {
+							locationManager.location = nil
+							locationManager.error = "Network error. Check internet connection"
+							location.errorSearch = "Network error. Check internet connection"
+							location = LocationWaetherClean(location: location)
+						}
 					}
 				}
 			}
