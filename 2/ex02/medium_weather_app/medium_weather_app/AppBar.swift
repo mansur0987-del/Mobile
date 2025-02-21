@@ -58,16 +58,13 @@ struct SearchField: View {
 							location = try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!, location: location)
 						}
 						catch {
-							print("Error: ", error)
-							location.current = nil
-							location.daily = []
-							location.week = []
+							location.errorSearch = "Network error. Check internet connection"
 						}
 					}
 				}
 			}
 			.overlay {
-				if isDropdownVisible {
+				if isDropdownVisible, location.location.count > 1 {
 					DropdownList(isDropdownVisible: $isDropdownVisible, isPortrait: isPortrait, options : $options, location: $location)
 				}
 			}
@@ -112,7 +109,7 @@ struct DropdownListText : View {
 				location.final_location = CollectName(line_1: option.admin1, line_2: option.admin2, line_3: option.admin3, line_4: option.admin4, country: option.country)
 				location.latitude = option.latitude
 				location.longitude = option.longitude
-				location.IsErrorSearch = false
+				location.errorSearch = ""
 				isDropdownVisible = false
 				location.IsGPS = false
 				Task {
@@ -120,10 +117,7 @@ struct DropdownListText : View {
 						location = try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!, location: location)
 					}
 					catch {
-						print("Error: ", error)
-						location.current = nil
-						location.daily = []
-						location.week = []
+						location.errorSearch = "Network error. Check internet connection"
 					}
 				}
 			}
@@ -143,18 +137,6 @@ struct ButtonGPS: View {
 				print("GPS")
 				locationManager.requestLocation()
 				location.IsGPS = true
-				if locationManager.latitude != nil , locationManager.longitude != nil {
-					do {
-						location = try await network.GetWeather(latitude: locationManager.latitude!, longitude: locationManager.longitude!, location : location)
-					}
-					catch {
-						print("Error: ", error)
-						location.current = nil
-						location.daily = []
-						location.week = []
-
-					}
-				}
 			}
 		}, label: {
 			Image(systemName: "location")

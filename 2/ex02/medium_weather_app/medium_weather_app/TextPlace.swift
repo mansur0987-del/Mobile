@@ -16,27 +16,39 @@ struct TextPlace: View {
 	var body: some View {
 		VStack {
 			if location.IsGPS == true {
-				if locationManager.location != nil {
-					Text(locationManager.location ?? "")
-//					Text(String(locationManager.latitude!) + " " + String(locationManager.longitude!))
-				}
-				else if locationManager.error != nil {
+				if locationManager.error != nil {
 					Text(locationManager.error!)
-						
-						.foregroundStyle(.red)
+					.foregroundStyle(.red)
+					.task {
+						location = LocationWaetherClean(location: location)
+						locationManager.location = nil
+					}
+				}
+				else if locationManager.location != nil {
+					Text(locationManager.location ?? "")
+					.task {
+						do {
+							location = try await network.GetWeather(latitude: locationManager.latitude!, longitude: locationManager.longitude!, location: location)
+						}
+						catch {
+							locationManager.location = nil
+							locationManager.error = "Network error. Check internet connection"
+							location.errorSearch = "Network error. Check internet connection"
+							location = LocationWaetherClean(location: location)
+						}
+					}
 				}
 			}
 			else {
-				if location.IsErrorSearch {
-					Text(location.errorSearch!)
-						
+				if location.errorSearch != "" {
+					Text(location.errorSearch)
 						.foregroundStyle(.red)
+						.task {
+							location = LocationWaetherClean(location: location)
+						}
 				}
 				else {
 					Text(location.final_location)
-//					if location.latitude != nil, location.longitude != nil {
-//						Text(String(location.latitude!) + " " + String(location.longitude!))
-//					}
 				}
 			}
 			
@@ -46,8 +58,6 @@ struct TextPlace: View {
 					Text(location.current!.wind_speed.formatted(.number.precision(.fractionLength(1))) + " km/h")
 					Text(location.current!.weather_code.name)
 				}.font(.system(size: 15))
-				
-				
 			}
 			else if IdActiveButton == 1 {
 				if isPortait {
@@ -85,7 +95,6 @@ struct TextPlace: View {
 						}
 					}.font(.system(size: 15))
 				}
-				
 			}
 			else {
 				ForEach(location.week , id: \.id) { el in

@@ -35,15 +35,20 @@ func FindOneSearchResult(options: [SearchData], location: Location) -> Location 
 		location.final_location = CollectName(line_1: option.admin1, line_2: option.admin2, line_3: option.admin3, line_4: option.admin4, country: option.country)
 		location.latitude = option.latitude
 		location.longitude = option.longitude
-		location.IsErrorSearch = false
+		location.errorSearch = ""
 		return location
 	}
 	location.final_location = ""
 	location.latitude = nil
 	location.longitude = nil
-	location.IsErrorSearch = true
-	location.errorSearch = "Location did not find"
+	location.errorSearch = location.errorSearch == "" ? "Location did not find" : location.errorSearch
 	return location
 }
 
-
+func LocationWaetherClean(location : Location) -> Location {
+	var location = location
+	location.current = nil
+	location.daily = []
+	location.week = []
+	return location
+}

@@ -23,10 +23,8 @@ struct Location : Codable {
 	var final_location : String = ""
 	var latitude : Double?
 	var longitude : Double?
-	var IsErrorGPS : Bool = false
-	var errorGPS : String?
-	var IsErrorSearch : Bool = false
-	var errorSearch : String?
+	var errorGPS : String = ""
+	var errorSearch : String = ""
 	var current : CurrentWeather?
 	var daily : [DailyWeather] = []
 	var week : [WeekWeather] = []
@@ -35,10 +33,8 @@ struct Location : Codable {
 		self.IsGPS = IsGPS
 		self.latitude = latitude
 		self.longitude = longitude
-		self.IsErrorGPS = IsErrorGPS
-		self.errorGPS = errorGPS
-		self.IsErrorSearch = IsErrorSearch
-		self.errorSearch = errorSearch
+		self.errorGPS = errorGPS ?? ""
+		self.errorSearch = errorSearch ?? ""
 	}
 }
 

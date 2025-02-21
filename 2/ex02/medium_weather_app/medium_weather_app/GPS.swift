@@ -25,29 +25,33 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	}
 	
 	func requestLocation() {
-		locationManager.requestWhenInUseAuthorization()
 		locationManager.requestLocation()
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		self.error = nil
 		guard let location = locations.last else { return }
 		DispatchQueue.main.async {
 			self.latitude = location.coordinate.latitude
 			self.longitude = location.coordinate.longitude
 		}
 		fetchLocationName(from: location)
+		
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 		if let clError = error as? CLError {
 			switch clError.code {
 			case .denied:
-				self.error = "Access to geolocation is prohibited. Allow it in the settings."
+				self.error = "Access to geolocation is prohibited. Allow it in the settings.";
 			case .locationUnknown:
 				self.error = "Couldn't determine location."
 			default:
 				self.error = "Error: \(clError.localizedDescription)"
 			}
+			self.latitude = nil
+			self.longitude = nil
+			self.location = nil
 		}
 	}
 	

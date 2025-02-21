@@ -115,10 +115,9 @@ class Network : ObservableObject {
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeZone = .gmt
 		
-				
-		print("Current")
 		
-		var location : Location = location
+		var location = LocationWaetherClean(location: location)
+				
 		location.current = CurrentWeather(
 			temperature: data.current.temperature2m,
 			wind_speed: data.current.wind_speed_10m,
@@ -126,13 +125,6 @@ class Network : ObservableObject {
 				WeatherCodeMan.code.contains(Int(data.current.weatherCode))
 				})!)
 
-		print(data.current.temperature2m.formatted(.number.precision(.fractionLength(1))), "°C")
-		print(weather_code_name.first(where: { WeatherCodeMan in
-			WeatherCodeMan.code.contains(Int(data.current.weatherCode))
-		})!.name)
-		print(data.current.wind_speed_10m.formatted(.number.precision(.fractionLength(1))), "km/h")
-		
-		print ("hourly")
 		dateFormatter.dateFormat = "HH:mm"
 		for (i, date) in data.hourly.time.enumerated().prefix(24) {
 			location.daily.append(DailyWeather(
@@ -144,20 +136,8 @@ class Network : ObservableObject {
 					WeatherCodeMan.code.contains(Int(data.hourly.weatherCode[i]))
 				})!
 			))
-//			print(dateFormatter.string(from: date))
-//			print(i)
-//			print(data.hourly.temperature2m[i] , "°C")
-//			print(data.hourly.wind_speed_10m[i], "km/h")
-//			print(data.hourly.weatherCode[i])
-			print(dateFormatter.string(from: date),
-				data.hourly.temperature2m[i].formatted(.number.precision(.fractionLength(1))) , "°C",
-				weather_code_name.first(where: { WeatherCodeMan in
-					WeatherCodeMan.code.contains(Int(data.hourly.weatherCode[i]))
-				})!.name,
-				data.hourly.wind_speed_10m[i].formatted(.number.precision(.fractionLength(1))), "km/h")
 		}
 
-		print ("Week")
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		for (i, date) in data.daily.time.enumerated() {
 			location.week.append(WeekWeather(
@@ -169,13 +149,6 @@ class Network : ObservableObject {
 					WeatherCodeMan.code.contains(Int(data.daily.weatherCode[i]))
 				})!
 			))
-		  print(dateFormatter.string(from: date),
-				data.daily.temperature2mMin[i].formatted(.number.precision(.fractionLength(1))), "°C",
-				data.daily.temperature2mMax[i].formatted(.number.precision(.fractionLength(1))), "°C",
-				weather_code_name.first(where: { WeatherCodeMan in
-					WeatherCodeMan.code.contains(Int(data.daily.weatherCode[i]))
-				})!.name
-		  )
 		}
 		return location
 	}
