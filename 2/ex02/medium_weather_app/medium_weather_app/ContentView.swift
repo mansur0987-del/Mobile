@@ -12,10 +12,6 @@ struct ContentView: View {
 	@StateObject var locationManager = LocationManager()
 	@State var location : Location = Location(IsGPS: true, IsErrorGPS: false, IsErrorSearch: false)
 	@State var IdActiveButton : Int = 0
-	var content = [Content(id: 0, content: "Currently"),
-				Content(id: 1, content: "Today"),
-				Content(id: 2, content: "Weekly")]
-	
 	var body: some View {
 		GeometryReader { geometry in
 			let width : CGFloat = geometry.size.width
@@ -26,7 +22,7 @@ struct ContentView: View {
 					.frame(width: width, height: height * 0.05)
 					.padding()
 								
-				TextPlace(IdActiveButton : $IdActiveButton, location: $location, locationManager: locationManager, content: content)
+				TextPlace(IdActiveButton : $IdActiveButton, location: $location, locationManager: locationManager, isPortait: isPortrait)
 					.font(.largeTitle)
 					.frame(width: width, height: isPortrait ? height * 0.7 : height * 0.6)
 					.contentShape(Rectangle())

@@ -12,36 +12,93 @@ struct TextPlace: View {
 	@Binding var IdActiveButton : Int
 	@Binding var location : Location
 	@ObservedObject var locationManager : LocationManager
-	var content : [Content]
+	var isPortait : Bool
 	var body: some View {
 		VStack {
 			if location.IsGPS == true {
-				if locationManager.latitude != nil , locationManager.longitude != nil {
+				if locationManager.location != nil {
 					Text(locationManager.location ?? "")
-					Text(String(locationManager.latitude!) + " " + String(locationManager.longitude!))
+//					Text(String(locationManager.latitude!) + " " + String(locationManager.longitude!))
 				}
 				else if locationManager.error != nil {
 					Text(locationManager.error!)
-						.font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+						
 						.foregroundStyle(.red)
-				}
-				else {
-					Text("11111")
 				}
 			}
 			else {
 				if location.IsErrorSearch {
 					Text(location.errorSearch!)
-						.font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+						
 						.foregroundStyle(.red)
 				}
 				else {
 					Text(location.final_location)
-					if location.latitude != nil, location.longitude != nil {
-						Text(String(location.latitude!) + " " + String(location.longitude!))
+//					if location.latitude != nil, location.longitude != nil {
+//						Text(String(location.latitude!) + " " + String(location.longitude!))
+//					}
+				}
+			}
+			
+			if IdActiveButton == 0, location.current != nil {
+				VStack {
+					Text(location.current!.temperature.formatted(.number.precision(.fractionLength(1))) + " °C")
+					Text(location.current!.wind_speed.formatted(.number.precision(.fractionLength(1))) + " km/h")
+					Text(location.current!.weather_code.name)
+				}.font(.system(size: 15))
+				
+				
+			}
+			else if IdActiveButton == 1 {
+				if isPortait {
+					ForEach(location.daily , id: \.id) { el in
+						HStack {
+							Text(el.time)
+							Text(el.temperature.formatted(.number.precision(.fractionLength(1))) + " °C")
+							Text(el.wind_speed.formatted(.number.precision(.fractionLength(1))) + " km/h")
+							Text(el.weather_code.name)
+						}.font(.system(size: 15))
 					}
+				}
+				else {
+					HStack {
+						VStack {
+							ForEach(location.daily.prefix(12) , id: \.id) { el in
+								HStack {
+									Text(el.time)
+									Text(el.temperature.formatted(.number.precision(.fractionLength(1))) + " °C")
+									Text(el.wind_speed.formatted(.number.precision(.fractionLength(1))) + " km/h")
+									Text(el.weather_code.name)
+								}
+							}
+						}
+						VStack {
+							ForEach(location.daily.suffix(12), id: \.id) { el in
+								HStack {
+									Text(el.time)
+									Text(el.temperature.formatted(.number.precision(.fractionLength(1))) + " °C")
+									Text(el.wind_speed.formatted(.number.precision(.fractionLength(1))) + " km/h")
+									Text(el.weather_code.name)
+								}
+								
+							}
+						}
+					}.font(.system(size: 15))
+				}
+				
+			}
+			else {
+				ForEach(location.week , id: \.id) { el in
+					HStack {
+						Text(el.date)
+						Text(el.temperature_Min.formatted(.number.precision(.fractionLength(1))) + " °C")
+						Text(el.temperature_Max.formatted(.number.precision(.fractionLength(1))) + " °C")
+						Text(el.weather_code.name)
+					}
+					.font(.system(size: 15))
 				}
 			}
 		}
+		.font(.title3)
 	}
 }

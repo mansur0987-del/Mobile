@@ -55,10 +55,13 @@ struct SearchField: View {
 				if location.latitude != nil, location.longitude != nil {
 					Task {
 						do {
-							try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!)
+							location = try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!, location: location)
 						}
 						catch {
 							print("Error: ", error)
+							location.current = nil
+							location.daily = []
+							location.week = []
 						}
 					}
 				}
@@ -114,10 +117,13 @@ struct DropdownListText : View {
 				location.IsGPS = false
 				Task {
 					do {
-						try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!)
+						location = try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!, location: location)
 					}
 					catch {
 						print("Error: ", error)
+						location.current = nil
+						location.daily = []
+						location.week = []
 					}
 				}
 			}
@@ -139,10 +145,14 @@ struct ButtonGPS: View {
 				location.IsGPS = true
 				if locationManager.latitude != nil , locationManager.longitude != nil {
 					do {
-						try await network.GetWeather(latitude: locationManager.latitude!, longitude: locationManager.longitude!)
+						location = try await network.GetWeather(latitude: locationManager.latitude!, longitude: locationManager.longitude!, location : location)
 					}
 					catch {
 						print("Error: ", error)
+						location.current = nil
+						location.daily = []
+						location.week = []
+
 					}
 				}
 			}
