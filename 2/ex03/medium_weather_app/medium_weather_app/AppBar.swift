@@ -28,8 +28,15 @@ struct SearchField: View {
 	var network = Network()
 	
 	var body: some View {
-		TextField("Location", text: $location.location)
+		if isDropdownVisible, location.location.count > 0 {
+			Text("\(.init(systemName: "magnifyingglass"))")
+				.font(.title2)
+				.foregroundStyle(.white)
+		}
+		
+		TextField("\(.init(systemName: "magnifyingglass")) Location", text: $location.location)
 			.font(.title2)
+			.foregroundStyle(.white)
 			.padding()
 			.background(Color.gray.tertiary)
 			.clipShape(RoundedRectangle(cornerRadius: 30))
@@ -37,6 +44,7 @@ struct SearchField: View {
 				if newValue.count > 0 {
 					Task {
 						do {
+							location.errorSearch = ""
 							options = try await network.Search(line: newValue)
 						}
 						catch {
@@ -50,18 +58,20 @@ struct SearchField: View {
 			}
 			.onSubmit {
 				location = FindOneSearchResult(options: options, location: location)
-				isDropdownVisible = false
-				location.IsGPS = false
+				options = []
 				if location.latitude != nil, location.longitude != nil {
 					Task {
 						do {
+							location.errorGetWeather = ""
 							location = try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!, location: location)
 						}
 						catch {
-							location.errorSearch = "Network error. Check internet connection"
+							location.errorGetWeather = "Network error. Check internet connection"
 						}
 					}
 				}
+				isDropdownVisible = false
+				location.IsGPS = false
 			}
 			.overlay {
 				if isDropdownVisible, location.location.count > 1 {
@@ -81,10 +91,10 @@ struct DropdownList : View {
 			@State var height : CGFloat = geometry.size.height
 			VStack {
 				List(self.options.prefix(5), id: \.self) { option in
-					DropdownListText(option: option, isDropdownVisible: $isDropdownVisible, location: $location)
+					DropdownListText(option: option, isDropdownVisible: $isDropdownVisible, location: $location, options : $options)
 				}
 				.scrollContentBackground(.hidden)
-				.frame(height: isPortrait ? height * 5 : height * 5)
+				.frame(height: isPortrait ? height * 8 : height * 6)
 				.padding(0)
 				.cornerRadius(8)
 				.shadow(radius: 5)
@@ -101,6 +111,7 @@ struct DropdownListText : View {
 	@State var option : SearchData
 	@Binding var isDropdownVisible : Bool
 	@Binding var location : Location
+	@Binding var options : [SearchData]
 	var body: some View {
 		Text(CollectName(line_1: option.admin1, line_2: option.admin2, line_3: option.admin3, line_4: option.admin4, country: option.country))
 			.frame(maxWidth: .infinity, alignment: .leading)
@@ -109,20 +120,21 @@ struct DropdownListText : View {
 				location.final_location = CollectName(line_1: option.admin1, line_2: option.admin2, line_3: option.admin3, line_4: option.admin4, country: option.country)
 				location.latitude = option.latitude
 				location.longitude = option.longitude
-				location.errorSearch = ""
-				isDropdownVisible = false
-				location.IsGPS = false
 				Task {
 					do {
+						location.errorGetWeather = ""
 						location = try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!, location: location)
 					}
 					catch {
-						location.errorSearch = "Network error. Check internet connection"
+						location.errorGetWeather = "Network error. Check internet connection"
 					}
 				}
+				options = []
+				isDropdownVisible = false
+				location.IsGPS = false
 			}
-			.foregroundStyle(Color.gray)
-			.listRowBackground(Color(UIColor(red: 99/255, green: 99/255, blue: 99/255, alpha: 1)))
+			.foregroundStyle(.white)
+			.listRowBackground(Color(UIColor(red: 30/255, green: 30/255, blue: 30/255, alpha: 0.7)))
 			.listRowSeparatorTint(Color.black)
 	}
 }
@@ -134,14 +146,20 @@ struct ButtonGPS: View {
 	var body: some View {
 		Button(action: {
 			Task {
-				print("GPS")
+				print("Button GPS")
+				location.errorGetWeather = ""
+				locationManager.location = nil
 				locationManager.requestLocation()
 				location.IsGPS = true
 			}
 		}, label: {
 			Image(systemName: "location")
-				.foregroundStyle(.gray)
 		})
 		.padding()
+		.foregroundStyle(.white)
+		.font(.system(size: 25))
+		.background(Color.gray.tertiary)
+		.cornerRadius(30)
+		.shadow(radius: 5)
 	}
 }

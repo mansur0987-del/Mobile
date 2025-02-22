@@ -23,19 +23,11 @@ struct Location : Codable {
 	var final_location : String = ""
 	var latitude : Double?
 	var longitude : Double?
-	var errorGPS : String = ""
 	var errorSearch : String = ""
+	var errorGetWeather : String = ""
 	var current : CurrentWeather?
 	var daily : [DailyWeather] = []
 	var week : [WeekWeather] = []
-	
-	init(IsGPS: Bool, latitude: Double? = nil, longitude: Double? = nil, IsErrorGPS: Bool, errorGPS: String? = nil, IsErrorSearch: Bool, errorSearch: String? = nil) {
-		self.IsGPS = IsGPS
-		self.latitude = latitude
-		self.longitude = longitude
-		self.errorGPS = errorGPS ?? ""
-		self.errorSearch = errorSearch ?? ""
-	}
 }
 
 struct ResultSearch : Decodable {
@@ -57,11 +49,13 @@ struct WeatherCodeMan : Codable {
 	var id : Int
 	var name : String
 	var code : [Int]
+	var icon_name: String
 	
-	init(id: Int, name: String, code: [Int]) {
+	init(id: Int, name: String, code: [Int], icon_name: String) {
 		self.id = id
 		self.name = name
 		self.code = code
+		self.icon_name = icon_name
 	}
 }
 
@@ -108,4 +102,3 @@ struct WeekWeather : Codable {
 		self.weather_code = weather_code
 	}
 }
-

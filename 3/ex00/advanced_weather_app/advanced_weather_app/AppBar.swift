@@ -1,6 +1,6 @@
 //
 //  AppBar.swift
-//  medium_weather_app
+//  advanced_weather_app
 //
 //  Created by Mansur Kakushkin on 2/20/25.
 //
@@ -28,6 +28,12 @@ struct SearchField: View {
 	var network = Network()
 	
 	var body: some View {
+		if isDropdownVisible, location.location.count > 0 {
+			Text("\(.init(systemName: "magnifyingglass"))")
+				.font(.title2)
+				.foregroundStyle(.white)
+		}
+		
 		TextField("\(.init(systemName: "magnifyingglass")) Location", text: $location.location)
 			.font(.title2)
 			.foregroundStyle(.white)
@@ -42,8 +48,7 @@ struct SearchField: View {
 							options = try await network.Search(line: newValue)
 						}
 						catch {
-							location = LocationWaetherClean(location: location)
-							location.errorSearch = "1. Network error. Check internet connection"
+							location.errorSearch = "Network error. Check internet connection"
 						}
 					}
 				}
@@ -53,31 +58,24 @@ struct SearchField: View {
 			}
 			.onSubmit {
 				location = FindOneSearchResult(options: options, location: location)
-				isDropdownVisible = false
-				location.IsGPS = false
+				options = []
 				if location.latitude != nil, location.longitude != nil {
 					Task {
 						do {
+							location.errorGetWeather = ""
 							location = try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!, location: location)
 						}
 						catch {
-							location = LocationWaetherClean(location: location)
-							location.errorSearch = "2. Network error. Check internet connection"
+							location.errorGetWeather = "Network error. Check internet connection"
 						}
 					}
 				}
+				isDropdownVisible = false
+				location.IsGPS = false
 			}
 			.overlay {
 				if isDropdownVisible, location.location.count > 1 {
 					DropdownList(isDropdownVisible: $isDropdownVisible, isPortrait: isPortrait, options : $options, location: $location)
-				}
-			}
-			.overlay {
-				if isDropdownVisible, location.location.count > 0 {
-					Text("\(.init(systemName: "magnifyingglass")) Location")
-						.font(.system(size: 15))
-						.foregroundStyle(.white)
-						.offset(x: isPortrait ? 80 : 250)
 				}
 			}
 	}
@@ -93,7 +91,7 @@ struct DropdownList : View {
 			@State var height : CGFloat = geometry.size.height
 			VStack {
 				List(self.options.prefix(5), id: \.self) { option in
-					DropdownListText(option: option, isDropdownVisible: $isDropdownVisible, location: $location)
+					DropdownListText(option: option, isDropdownVisible: $isDropdownVisible, location: $location, options : $options)
 				}
 				.scrollContentBackground(.hidden)
 				.frame(height: isPortrait ? height * 8 : height * 6)
@@ -113,6 +111,7 @@ struct DropdownListText : View {
 	@State var option : SearchData
 	@Binding var isDropdownVisible : Bool
 	@Binding var location : Location
+	@Binding var options : [SearchData]
 	var body: some View {
 		Text(CollectName(line_1: option.admin1, line_2: option.admin2, line_3: option.admin3, line_4: option.admin4, country: option.country))
 			.frame(maxWidth: .infinity, alignment: .leading)
@@ -121,18 +120,18 @@ struct DropdownListText : View {
 				location.final_location = CollectName(line_1: option.admin1, line_2: option.admin2, line_3: option.admin3, line_4: option.admin4, country: option.country)
 				location.latitude = option.latitude
 				location.longitude = option.longitude
-				location.errorSearch = ""
-				isDropdownVisible = false
-				location.IsGPS = false
 				Task {
 					do {
+						location.errorGetWeather = ""
 						location = try await network.GetWeather(latitude: location.latitude!, longitude: location.longitude!, location: location)
 					}
 					catch {
-						location = LocationWaetherClean(location: location)
-						location.errorSearch = "3. Network error. Check internet connection"
+						location.errorGetWeather = "Network error. Check internet connection"
 					}
 				}
+				options = []
+				isDropdownVisible = false
+				location.IsGPS = false
 			}
 			.foregroundStyle(.white)
 			.listRowBackground(Color(UIColor(red: 30/255, green: 30/255, blue: 30/255, alpha: 0.7)))
@@ -147,7 +146,9 @@ struct ButtonGPS: View {
 	var body: some View {
 		Button(action: {
 			Task {
-				print("GPS")
+				print("Button GPS")
+				location.errorGetWeather = ""
+				locationManager.location = nil
 				locationManager.requestLocation()
 				location.IsGPS = true
 			}

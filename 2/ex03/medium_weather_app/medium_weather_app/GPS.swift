@@ -19,24 +19,20 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	override init() {
 		super.init()
 		self.locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-		locationManager.requestWhenInUseAuthorization()
-		locationManager.startUpdatingLocation()
 	}
 	
 	func requestLocation() {
+		locationManager.requestWhenInUseAuthorization()
 		locationManager.requestLocation()
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		self.error = nil
 		guard let location = locations.last else { return }
 		DispatchQueue.main.async {
 			self.latitude = location.coordinate.latitude
 			self.longitude = location.coordinate.longitude
+			self.fetchLocationName(from: location)
 		}
-		fetchLocationName(from: location)
-		
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

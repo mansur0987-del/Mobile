@@ -1,6 +1,6 @@
 //
 //  GPS.swift
-//  medium_weather_app
+//  advanced_weather_app
 //
 //  Created by Mansur Kakushkin on 2/20/25.
 //
@@ -27,9 +27,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		print("222")
 		guard let location = locations.last else { return }
-		print("333")
 		DispatchQueue.main.async {
 			self.latitude = location.coordinate.latitude
 			self.longitude = location.coordinate.longitude

@@ -52,3 +52,37 @@ func LocationWaetherClean(location : Location) -> Location {
 	location.week = []
 	return location
 }
+
+var weather_code_name : [WeatherCodeMan] = [
+	WeatherCodeMan(id: 0, name: "Clear sky", code: [0], icon_name: "sun.max"),
+	WeatherCodeMan(id: 1, name: "Partly cloudy", code: [1, 2, 3], icon_name: "cloud"),
+	WeatherCodeMan(id: 2, name: "Fog", code: [45, 48], icon_name: "cloud.fog.fill"),
+	WeatherCodeMan(id: 3, name: "Drizzle", code: [51, 53, 55, 61, 63, 65], icon_name: "cloud.drizzle"),
+	WeatherCodeMan(id: 4, name: "Rain", code: [66, 67, 80, 81, 82], icon_name: "cloud.rain"),
+	WeatherCodeMan(id: 5, name: "Snow", code: [71, 73, 75, 77, 85, 86], icon_name: "cloud.snow"),
+	WeatherCodeMan(id: 6, name: "Thunderstorm", code: [95, 96, 99], icon_name: "cloud.bolt.rain"),
+]
+
+func CheckerIsErrors (location: Location, locationManager: LocationManager) -> String {
+	if location.IsGPS {
+		print("Use GPS")
+		if locationManager.error != nil {
+			return locationManager.error!
+		}
+		if locationManager.location == nil || locationManager.latitude == nil || locationManager.longitude == nil {
+			return "Loading location... \nIf it takes a long time, check ypur internet connection."
+		}
+	}
+	else {
+		print("Use NOT GPS")
+		if location.final_location == "" || location.latitude == nil || location.longitude == nil {
+			if location.errorSearch != "" {
+				return location.errorSearch
+			}
+		}
+	}
+	if location.errorGetWeather != "" {
+		return location.errorGetWeather
+	}
+	return "OK"
+}

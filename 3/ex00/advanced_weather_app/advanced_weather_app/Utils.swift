@@ -1,6 +1,6 @@
 //
 //  Utils.swift
-//  medium_weather_app
+//  advanced_weather_app
 //
 //  Created by Mansur Kakushkin on 2/20/25.
 //
@@ -64,30 +64,25 @@ var weather_code_name : [WeatherCodeMan] = [
 ]
 
 func CheckerIsErrors (location: Location, locationManager: LocationManager) -> String {
-	print("111")
 	if location.IsGPS {
+		print("Use GPS")
 		if locationManager.error != nil {
 			return locationManager.error!
 		}
 		if locationManager.location == nil || locationManager.latitude == nil || locationManager.longitude == nil {
-			return "Couldn't determine location."
-		}
-		if location.current == nil {
-			return "Network error. Check internet connection"
+			return "Loading location... \nIf it takes a long time, check ypur internet connection."
 		}
 	}
 	else {
+		print("Use NOT GPS")
 		if location.final_location == "" || location.latitude == nil || location.longitude == nil {
-			if location.errorSearch == "Location did not find" {
-				return "Location did not find"
-			}
-			else {
-				return "Network error. Check internet connection"
+			if location.errorSearch != "" {
+				return location.errorSearch
 			}
 		}
-		if location.current == nil {
-			return "Network error. Check internet connection"
-		}
+	}
+	if location.errorGetWeather != "" {
+		return location.errorGetWeather
 	}
 	return "OK"
 }

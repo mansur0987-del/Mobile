@@ -17,15 +17,6 @@ enum NetworkError: Error {
 	case invalidUrl
 }
 
-var weather_code_name : [WeatherCodeMan] = [
-	WeatherCodeMan(id: 0, name: "Clear sky", code: [0]),
-	WeatherCodeMan(id: 1, name: "Partly cloudy", code: [1, 2, 3]),
-	WeatherCodeMan(id: 2, name: "Fog", code: [45, 48]),
-	WeatherCodeMan(id: 3, name: "Drizzle", code: [51, 53, 55, 61, 63, 65]),
-	WeatherCodeMan(id: 4, name: "Rain", code: [66, 67, 80, 81, 82]),
-	WeatherCodeMan(id: 5, name: "Snow", code: [71, 73, 75, 77, 85, 86]),
-	WeatherCodeMan(id: 6, name: "Thunderstorm", code: [95, 96, 99]),
-]
 
 class Network : ObservableObject {
 	func Search(line : String) async throws -> [SearchData] {

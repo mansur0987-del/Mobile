@@ -39,9 +39,9 @@ struct ButtonCurrently: View {
 		}, label: {
 			VStack {
 				Image(systemName: "timer")
-					.foregroundStyle(.gray)
+					.foregroundStyle(.white)
 				Text("Currently")
-					.foregroundStyle(.gray)
+					.foregroundStyle(.white)
 			}
 			.font(.callout)
 			.padding()
@@ -59,9 +59,9 @@ struct ButtonToday: View {
 		}, label: {
 			VStack {
 				Image(systemName: "calendar")
-					.foregroundStyle(.gray)
+					.foregroundStyle(.white)
 				Text("Today")
-					.foregroundStyle(.gray)
+					.foregroundStyle(.white)
 			}
 			.font(.callout)
 			.padding()
@@ -79,9 +79,9 @@ struct ButtonWeekly: View {
 		}, label: {
 			VStack {
 				Image(systemName: "calendar.badge.plus")
-					.foregroundStyle(.gray)
+					.foregroundStyle(.white)
 				Text("Weekly")
-					.foregroundStyle(.gray)
+					.foregroundStyle(.white)
 			}
 			.font(.callout)
 			.padding()

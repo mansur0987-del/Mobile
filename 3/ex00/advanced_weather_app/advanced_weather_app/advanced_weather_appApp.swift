@@ -1,6 +1,6 @@
 //
-//  medium_weather_appApp.swift
-//  medium_weather_app
+//  advanced_weather_appApp.swift
+//  advanced_weather_app
 //
 //  Created by Mansur Kakushkin on 2/20/25.
 //

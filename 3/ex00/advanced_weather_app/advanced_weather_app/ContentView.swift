@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  medium_weather_app
+//  advanced_weather_app
 //
 //  Created by Mansur Kakushkin on 2/20/25.
 //
@@ -10,7 +10,7 @@ import CoreLocation
 
 struct ContentView: View {
 	@StateObject var locationManager = LocationManager()
-	@State var location : Location = Location(IsGPS: true, IsErrorGPS: false, IsErrorSearch: false)
+	@State var location : Location = Location()
 	@State var IdActiveButton : Int = 0
 	var body: some View {
 		GeometryReader { geometry in

@@ -1,6 +1,6 @@
 //
 //  Interfaces.swift
-//  medium_weather_app
+//  advanced_weather_app
 //
 //  Created by Mansur Kakushkin on 2/20/25.
 //
@@ -23,19 +23,11 @@ struct Location : Codable {
 	var final_location : String = ""
 	var latitude : Double?
 	var longitude : Double?
-	var errorGPS : String = ""
 	var errorSearch : String = ""
+	var errorGetWeather : String = ""
 	var current : CurrentWeather?
 	var daily : [DailyWeather] = []
 	var week : [WeekWeather] = []
-	
-	init(IsGPS: Bool, latitude: Double? = nil, longitude: Double? = nil, IsErrorGPS: Bool, errorGPS: String? = nil, IsErrorSearch: Bool, errorSearch: String? = nil) {
-		self.IsGPS = IsGPS
-		self.latitude = latitude
-		self.longitude = longitude
-		self.errorGPS = errorGPS ?? ""
-		self.errorSearch = errorSearch ?? ""
-	}
 }
 
 struct ResultSearch : Decodable {
