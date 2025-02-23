@@ -122,6 +122,7 @@ class Network : ObservableObject {
 			location.daily.append(DailyWeather(
 				id: i,
 				time: dateFormatter.date(from: dateString)!,
+				time_string: dateString,
 				temperature: data.hourly.temperature2m[i],
 				wind_speed: data.hourly.wind_speed_10m[i],
 				weather_code: weather_code_name.first(where: { WeatherCodeMan in
@@ -132,12 +133,13 @@ class Network : ObservableObject {
 
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		for (i, date) in data.daily.time.enumerated() {
-//			let dateString = dateFormatter.string(from: date)
+			let dateString = dateFormatter.string(from: date)
 			location.week.append(WeekWeather(
 				id: i,
-				date: dateFormatter.string(from: date),
-				temperature_Max: data.daily.temperature2mMin[i],
-				temperature_Min: data.daily.temperature2mMax[i],
+				date: dateFormatter.date(from: dateString)!,
+				date_string: dateString,
+				temperature_Max: data.daily.temperature2mMax[i],
+				temperature_Min: data.daily.temperature2mMin[i],
 				weather_code: weather_code_name.first(where: { WeatherCodeMan in
 					WeatherCodeMan.code.contains(Int(data.daily.weatherCode[i]))
 				})!

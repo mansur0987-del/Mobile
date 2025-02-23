@@ -28,15 +28,7 @@ struct ContentView: View {
 					.frame(width: width, height: isPortrait ? height * 0.7 : height * 0.6)
 					.contentShape(Rectangle())
 					.zIndex(0)
-					.gesture(DragGesture(minimumDistance: 3.0, coordinateSpace: .local)
-						.onEnded { value in
-							switch(value.translation.width, value.translation.height) {
-							case (...0, -30...30):  IdActiveButton = IdActiveButton == 2 ? IdActiveButton : IdActiveButton + 1;
-							case (0..., -30...30):	IdActiveButton = IdActiveButton == 0 ? IdActiveButton : IdActiveButton - 1
-							default: break
-							}
-						}
-					)
+					
 				Spacer()
 				ButtonBar(IdActiveButton: $IdActiveButton)
 					.frame(width: width, height: isPortrait ? height * 0.1 : height * 0.2)

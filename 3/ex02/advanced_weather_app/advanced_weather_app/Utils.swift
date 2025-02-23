@@ -7,6 +7,8 @@
 
 import Foundation
 
+
+
 func CollectName(line_1: String?, line_2: String?, line_3: String?, line_4: String?, country: String?) -> String {
 	var collect : String = ""
 	if line_4 != nil {
@@ -65,7 +67,6 @@ var weather_code_name : [WeatherCodeMan] = [
 
 func CheckerIsErrors (location: Location, locationManager: LocationManager) -> String {
 	if location.IsGPS {
-		print("Use GPS")
 		if locationManager.error != nil {
 			return locationManager.error!
 		}
@@ -74,7 +75,6 @@ func CheckerIsErrors (location: Location, locationManager: LocationManager) -> S
 		}
 	}
 	else {
-		print("Use NOT GPS")
 		if location.final_location == "" || location.latitude == nil || location.longitude == nil {
 			if location.errorSearch != "" {
 				return location.errorSearch
@@ -86,3 +86,4 @@ func CheckerIsErrors (location: Location, locationManager: LocationManager) -> S
 	}
 	return "OK"
 }
+
