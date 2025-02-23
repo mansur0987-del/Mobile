@@ -118,9 +118,10 @@ class Network : ObservableObject {
 
 		dateFormatter.dateFormat = "HH:mm"
 		for (i, date) in data.hourly.time.enumerated().prefix(24) {
+			let dateString = dateFormatter.string(from: date)
 			location.daily.append(DailyWeather(
 				id: i,
-				time: dateFormatter.string(from: date),
+				time: dateFormatter.date(from: dateString)!,
 				temperature: data.hourly.temperature2m[i],
 				wind_speed: data.hourly.wind_speed_10m[i],
 				weather_code: weather_code_name.first(where: { WeatherCodeMan in
@@ -131,6 +132,7 @@ class Network : ObservableObject {
 
 		dateFormatter.dateFormat = "yyyy-MM-dd"
 		for (i, date) in data.daily.time.enumerated() {
+//			let dateString = dateFormatter.string(from: date)
 			location.week.append(WeekWeather(
 				id: i,
 				date: dateFormatter.string(from: date),

@@ -73,12 +73,12 @@ struct CurrentWeather : Codable {
 
 struct DailyWeather : Codable {
 	var id : Int
-	var time : String
+	var time : Date
 	var temperature : Float
 	var wind_speed : Float
 	var weather_code : WeatherCodeMan
 	
-	init(id: Int, time: String, temperature: Float, wind_speed: Float, weather_code: WeatherCodeMan) {
+	init(id: Int, time: Date, temperature: Float, wind_speed: Float, weather_code: WeatherCodeMan) {
 		self.id = id
 		self.time = time
 		self.temperature = temperature
