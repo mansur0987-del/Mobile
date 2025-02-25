@@ -11,7 +11,6 @@
 		609214AB2D6CC56400677364 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609214AA2D6CC56400677364 /* ContentView.swift */; };
 		609214AD2D6CC56A00677364 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609214AC2D6CC56A00677364 /* Assets.xcassets */; };
 		609214B02D6CC56A00677364 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609214AF2D6CC56A00677364 /* Preview Assets.xcassets */; };
-		609214C42D6E4BD900677364 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609214C32D6E4BD900677364 /* Auth.swift */; };
 		609214C62D6E505D00677364 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 609214C52D6E505D00677364 /* GoogleService-Info.plist */; };
 		609214C92D6E51FB00677364 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 609214C82D6E51FB00677364 /* FirebaseAnalytics */; };
 		609214CB2D6E51FB00677364 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 609214CA2D6E51FB00677364 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -48,7 +47,6 @@
 		609214AA2D6CC56400677364 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		609214AC2D6CC56A00677364 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		609214AF2D6CC56A00677364 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		609214C32D6E4BD900677364 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		609214C52D6E505D00677364 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		609214F82D6E544600677364 /* diary-app-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "diary-app-Info.plist"; sourceTree = SOURCE_ROOT; };
 		609214FE2D6E58E000677364 /* FirebaseInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseInit.swift; sourceTree = "<group>"; };
@@ -116,7 +114,6 @@
 				609214AC2D6CC56A00677364 /* Assets.xcassets */,
 				609214C52D6E505D00677364 /* GoogleService-Info.plist */,
 				609214AE2D6CC56A00677364 /* Preview Content */,
-				609214C32D6E4BD900677364 /* Auth.swift */,
 				609214FE2D6E58E000677364 /* FirebaseInit.swift */,
 			);
 			path = diary_app;
@@ -236,7 +233,6 @@
 				609214AB2D6CC56400677364 /* ContentView.swift in Sources */,
 				609214A92D6CC56400677364 /* diary_appApp.swift in Sources */,
 				609214FF2D6E58E000677364 /* FirebaseInit.swift in Sources */,
-				609214C42D6E4BD900677364 /* Auth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
