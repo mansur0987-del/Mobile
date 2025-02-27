@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 @main
 struct diary_appApp: App {
 	@UIApplicationDelegateAdaptor(AppDelegate.self) var delegate

@@ -7,11 +7,11 @@
 
 import SwiftUI
 import FirebaseAuth
-import AuthenticationServices
 
 struct ContentView: View {
-	@State private var isLoading = false
-	private var contextProvider = ContextProvider()
+	@StateObject private var viewModel = SettingsViewModel()
+	@State private var IsMainView: Bool = false
+	@State private var IsAuthView: Bool = false
 	
     var body: some View {
         VStack {
@@ -21,54 +21,56 @@ struct ContentView: View {
 			Text("Diary")
 				.font(.system(size: 50))
 				.padding()
-			Button(action: {
-				signInWithWebRedirect()
-			}, label: {
+			Button {
+				Task {
+					let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
+					if authUser == nil {
+						IsMainView = false
+						IsAuthView = true
+					}
+					else {
+						IsMainView = true
+						IsAuthView = false
+					}
+					print("IsMainView: ", IsMainView)
+					print("IsAuthView: ", IsAuthView)
+				}
+			} label: {
 				Text("Login")
 					.padding()
 					.background(.gray.tertiary)
 					.cornerRadius(30)
-			})
-			.padding()
+			}
+			
         }
         .padding()
-//		.fullScreenCover(isPresented: $IsLoginButton, content: {
-//			LoginSheet(IsLoginButton : $IsLoginButton)
-//		})
 		.preferredColorScheme(.dark)
 		.background()
-    }
-	func signInWithWebRedirect() {
-		guard let url = URL(string: "https://diary-app-b0f08.web.app/__/auth/handler") else { return }
-		isLoading = true
-		
-		let session = ASWebAuthenticationSession(url: url, callbackURLScheme: "com.googleusercontent.apps.1067011176693-a8t5v428tq6p4e668fsjl9smhs1nuisu", completionHandler: { callbackURL, error in
-			isLoading = false
-			if let error = error {
-				print("Ошибка авторизации: \(error.localizedDescription)")
-				return
+		.fullScreenCover(isPresented: $IsAuthView) {
+			AuthView(IsAuthView: $IsAuthView, IsMainView: $IsMainView)
+		}
+		.fullScreenCover(isPresented: $IsMainView) {
+			Button {
+				do {
+					try viewModel.signOut()
+					IsMainView = false
+					print("Logout")
+				} catch {
+					print(error)
+				}
+			} label: {
+				Text("Logout")
+					.padding()
+					.background(.gray.tertiary)
+					.cornerRadius(30)
 			}
-			print("Успешная авторизация: \(callbackURL?.absoluteString ?? "")")
-		})
-		session.presentationContextProvider = contextProvider // Используем сохраненный объект
-		session.start()
-
-	}
+		}
+		.onOpenURL { url in
+			_ = Auth.auth().canHandle(url)
+		}
+    }
 }
 
 #Preview {
     ContentView()
 }
-
-class ContextProvider: NSObject, ASWebAuthenticationPresentationContextProviding {
-	func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-			guard let windowScene = UIApplication.shared.connectedScenes
-					.compactMap({ $0 as? UIWindowScene })
-					.first,
-				  let window = windowScene.windows.first else {
-				fatalError("Ошибка: Не удалось найти активное окно")
-			}
-			return window
-		}
-}
-
