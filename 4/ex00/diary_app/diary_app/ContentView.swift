@@ -9,61 +9,24 @@ import SwiftUI
 import FirebaseAuth
 
 struct ContentView: View {
-	@StateObject private var viewModel = SettingsViewModel()
+	
 	@State private var IsMainView: Bool = false
 	@State private var IsAuthView: Bool = false
 	
+	@State private var userData: AuthDataResultModel? = nil
+	
     var body: some View {
         VStack {
-			Text("Welcome to your")
-				.font(.system(size: 40))
-				.padding()
-			Text("Diary")
-				.font(.system(size: 50))
-				.padding()
-			Button {
-				Task {
-					let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
-					if authUser == nil {
-						IsMainView = false
-						IsAuthView = true
-					}
-					else {
-						IsMainView = true
-						IsAuthView = false
-					}
-					print("IsMainView: ", IsMainView)
-					print("IsAuthView: ", IsAuthView)
-				}
-			} label: {
-				Text("Login")
-					.padding()
-					.background(.gray.tertiary)
-					.cornerRadius(30)
-			}
-			
+			MainLoginView(IsMainView: $IsMainView, IsAuthView: $IsAuthView, userData: $userData)
         }
         .padding()
 		.preferredColorScheme(.dark)
 		.background()
 		.fullScreenCover(isPresented: $IsAuthView) {
-			AuthView(IsAuthView: $IsAuthView, IsMainView: $IsMainView)
+			AuthView(userData: $userData, IsAuthView: $IsAuthView, IsMainView: $IsMainView)
 		}
 		.fullScreenCover(isPresented: $IsMainView) {
-			Button {
-				do {
-					try viewModel.signOut()
-					IsMainView = false
-					print("Logout")
-				} catch {
-					print(error)
-				}
-			} label: {
-				Text("Logout")
-					.padding()
-					.background(.gray.tertiary)
-					.cornerRadius(30)
-			}
+			MainNotesList(IsMainView: $IsMainView, userData: $userData)
 		}
 		.onOpenURL { url in
 			_ = Auth.auth().canHandle(url)
@@ -74,3 +37,80 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+struct MainLoginView : View {
+	@Binding var IsMainView: Bool
+	@Binding var IsAuthView: Bool
+	@Binding var userData: AuthDataResultModel?
+	var body: some View {
+		Text("Welcome to your")
+			.font(.system(size: 40))
+			.foregroundStyle(.blue.secondary)
+			.padding()
+		Text("DIARY")
+			.font(.system(size: 60))
+			.foregroundStyle(.blue)
+			.padding()
+		Button {
+			Task {
+				do {
+					userData = try await AuthenticationManager.shared.getAuthenticatedUser()
+					IsMainView = true
+					IsAuthView = false
+				}
+				catch {
+					IsMainView = false
+					IsAuthView = true
+					print(error)
+				}
+				
+			}
+		} label: {
+			Text("Login")
+				.font(.system(size: 30))
+				.foregroundStyle(.white.secondary)
+				.padding(25)
+				.background(.blue.secondary)
+				.cornerRadius(30)
+		}
+	}
+}
+
+struct MainNotesList : View {
+	@Binding var IsMainView : Bool
+	@Binding var userData : AuthDataResultModel?
+	@State var IsShowNoteView : Bool = false
+	var body: some View {
+		VStack {
+			LogoutView(IsMainView: $IsMainView, userData: $userData)
+			NotesListView(userData: $userData, IsShowNoteView: $IsShowNoteView)
+			Spacer()
+			AddNoteView(IsShowNoteView: $IsShowNoteView, userData: $userData)
+		}
+		
+	}
+}
+
+struct LogoutView :View {
+	@StateObject private var viewModel = SettingsViewModel()
+	@Binding var IsMainView : Bool
+	@Binding var userData : AuthDataResultModel?
+	var body: some View {
+		Button {
+			do {
+				try viewModel.signOut()
+				userData = nil
+				IsMainView = false
+				print("Logout")
+			} catch {
+				print(error)
+			}
+		} label: {
+			Text("Logout")
+				.padding()
+				.background(.gray.tertiary)
+				.cornerRadius(30)
+		}
+	}
+}
+

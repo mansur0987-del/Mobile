@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AuthView : View {
 	@StateObject private var viewModel = AuthenticationViewModel()
+	@Binding var userData : AuthDataResultModel?
 	@Binding var IsAuthView: Bool
 	@Binding var IsMainView: Bool
 	var body: some View {
@@ -16,37 +17,46 @@ struct AuthView : View {
 			Button(action: {
 				Task {
 					do {
-						try await viewModel.signInGoogle()
+						userData = try await viewModel.signInGoogle()
 						IsAuthView = false
 						IsMainView = true
-						print("GOOGLE AUTH!")
 					} catch {
 						print(error)
 					}
 				}
 			}, label: {
-				Text("Google Auth")
-					.padding()
-					.background(.gray.tertiary)
-					.cornerRadius(30)
+				HStack {
+					Image("google_image")
+					Text("Continue with Google")
+				}
+				.font(.system(size: 20))
+				.foregroundStyle(.white.secondary)
+				.padding()
+				.background(.blue.secondary)
+				.cornerRadius(30)
 			})
 			.padding()
 			Button(action: {
 				Task {
 					do {
-						try await viewModel.signInGitHub()
+						userData = try await viewModel.signInGitHub()
+						print("userData:", userData)
 						IsAuthView = false
 						IsMainView = true
-						print("GIT HUB AUTH!")
 					} catch {
 						print(error)
 					}
 				}
 			}, label: {
-				Text("Github Auth")
-					.padding()
-					.background(.gray.tertiary)
-					.cornerRadius(30)
+				HStack {
+					Image("github_image")
+					Text("Continue with GitHub")
+				}
+				.font(.system(size: 20))
+				.foregroundStyle(.white.secondary)
+				.padding()
+				.background(.blue.secondary)
+				.cornerRadius(30)
 			})
 			.padding()
 		}

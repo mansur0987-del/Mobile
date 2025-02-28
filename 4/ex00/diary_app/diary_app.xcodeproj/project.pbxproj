@@ -15,6 +15,9 @@
 		602688372D70B99A00768C35 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 602688362D70B99A00768C35 /* FirebaseCore */; };
 		6026883B2D70BE1B00768C35 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 6026883A2D70BE1B00768C35 /* FirebaseAnalyticsOnDeviceConversion */; };
 		6026883D2D70BE1B00768C35 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 6026883C2D70BE1B00768C35 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		602688412D71F7C800768C35 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 602688402D71F7C800768C35 /* FirebaseFirestore */; };
+		602688432D71FBAF00768C35 /* db.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602688422D71FBAF00768C35 /* db.swift */; };
+		602688452D72572F00768C35 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602688442D72572F00768C35 /* Diary.swift */; };
 		609214A92D6CC56400677364 /* diary_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609214A82D6CC56400677364 /* diary_appApp.swift */; };
 		609214AB2D6CC56400677364 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609214AA2D6CC56400677364 /* ContentView.swift */; };
 		609214AD2D6CC56A00677364 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609214AC2D6CC56A00677364 /* Assets.xcassets */; };
@@ -28,6 +31,8 @@
 		6026882B2D6FAE0000768C35 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6026882D2D709CD400768C35 /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
 		6026882F2D70A98A00768C35 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		602688422D71FBAF00768C35 /* db.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = db.swift; sourceTree = "<group>"; };
+		602688442D72572F00768C35 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		609214A52D6CC56400677364 /* diary_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = diary_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609214A82D6CC56400677364 /* diary_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diary_appApp.swift; sourceTree = "<group>"; };
 		609214AA2D6CC56400677364 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -47,6 +52,7 @@
 				602688372D70B99A00768C35 /* FirebaseCore in Frameworks */,
 				609214FB2D6E55FF00677364 /* GoogleSignIn in Frameworks */,
 				6026883D2D70BE1B00768C35 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				602688412D71F7C800768C35 /* FirebaseFirestore in Frameworks */,
 				602688332D70B99A00768C35 /* FirebaseAnalytics in Frameworks */,
 				602688352D70B99A00768C35 /* FirebaseAuth in Frameworks */,
 			);
@@ -91,6 +97,8 @@
 				609214FE2D6E58E000677364 /* FirebaseInit.swift */,
 				6026882D2D709CD400768C35 /* Auth.swift */,
 				6026882F2D70A98A00768C35 /* AuthView.swift */,
+				602688422D71FBAF00768C35 /* db.swift */,
+				602688442D72572F00768C35 /* Diary.swift */,
 			);
 			path = diary_app;
 			sourceTree = "<group>";
@@ -127,6 +135,7 @@
 				602688362D70B99A00768C35 /* FirebaseCore */,
 				6026883A2D70BE1B00768C35 /* FirebaseAnalyticsOnDeviceConversion */,
 				6026883C2D70BE1B00768C35 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				602688402D71F7C800768C35 /* FirebaseFirestore */,
 			);
 			productName = diary_app;
 			productReference = 609214A52D6CC56400677364 /* diary_app.app */;
@@ -187,7 +196,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				602688452D72572F00768C35 /* Diary.swift in Sources */,
 				609214AB2D6CC56400677364 /* ContentView.swift in Sources */,
+				602688432D71FBAF00768C35 /* db.swift in Sources */,
 				602688302D70A98A00768C35 /* AuthView.swift in Sources */,
 				609214A92D6CC56400677364 /* diary_appApp.swift in Sources */,
 				609214FF2D6E58E000677364 /* FirebaseInit.swift in Sources */,
@@ -444,6 +455,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 602688312D70B99900768C35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		602688402D71F7C800768C35 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 602688312D70B99900768C35 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 		609214FA2D6E55FF00677364 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -23,6 +23,7 @@ struct GoogleSignInResultModel {
 struct GitHubSignInResultModel {
 	let accessToken: String
 	let email: String?
+	let uid: String
 }
 
 
@@ -34,9 +35,10 @@ struct AuthDataResultModel {
 	
 	init(user: User) {
 		self.uid = user.uid
-		self.email = user.email
+		self.email = user.email != nil ? user.email : user.providerData.first as? String
 		self.photoUrl = user.photoURL?.absoluteString
 		self.isAnonymous = user.isAnonymous
+		
 	}
 }
 
@@ -74,7 +76,7 @@ final class AuthenticationManager {
 	static let shared = AuthenticationManager()
 	private init() { }
 	
-	func getAuthenticatedUser() throws -> AuthDataResultModel {
+	func getAuthenticatedUser() async throws -> AuthDataResultModel {
 		guard let user = Auth.auth().currentUser else {
 			throw URLError(.badServerResponse)
 		}
@@ -129,48 +131,30 @@ final class SignInGoogleHelper {
 final class SignInGitHubHepler {
 	
 	@MainActor
-	func signIn() async throws {
+	func signIn() async throws -> AuthDataResultModel {
 		let provider = OAuthProvider(providerID: "github.com")
-		print("111")
 		provider.scopes = ["read:user", "user:email"]
-		print("222")
 		do {
 			// Получаем credential с помощью асинхронного вызова
-			guard let credential = try await getCredentialWithAsync(provider: provider) else {
-				print("Не удалось получить credential.")
-				return
-			}
-
+			let credential = try await getCredentialWithAsync(provider: provider)
 			// Теперь выполняем вход в Firebase с использованием полученных учетных данных
-			try await Auth.auth().signIn(with: credential)
-
-			print("✅ Вход через GitHub выполнен!")
+			if credential == nil {
+				throw URLError(.badServerResponse)
+			}
+			let authDataResult = try await Auth.auth().signIn(with: credential!)
+			print (authDataResult.user)
+			if authDataResult.additionalUserInfo != nil {
+				print (authDataResult.additionalUserInfo!.username ?? "default value")
+				print (authDataResult.additionalUserInfo!.profile ?? "default value")
+			}
+			
+			print(authDataResult.user.providerData)
+			
+			
+			return AuthDataResultModel(user: authDataResult.user)
 		} catch {
-			print("Ошибка авторизации: \(error.localizedDescription)")
+			throw error
 		}
-//		await provider.getCredentialWith(nil) { credential, error in
-//			print("333")
-//			if let error = error {
-//				print("Ошибка авторизации через GitHub: \(error.localizedDescription)")
-//				return
-//			}
-//			print("444")
-//			guard let credential = credential else {
-//				print("Не удалось получить credential")
-//				return
-//			}
-//			print("555")
-//			// Авторизация в Firebase
-//			Auth.auth().signIn(with: credential) { authResult, error in
-//				if error != nil {
-//					print("Ошибка входа в Firebase: \(error!.localizedDescription)")
-//					return
-//				}
-//				print("Успешный вход! Пользователь: \(authResult?.user.displayName ?? "Без имени")")
-//				
-//				guard let oauthCredential = authResult?.credential else { return }
-//			}
-//		}
 	}
 	
 	// Создаем обертку для асинхронного вызова
@@ -189,16 +173,26 @@ final class SignInGitHubHepler {
 
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
-	func signInGoogle() async throws {
+	func signInGoogle() async throws -> AuthDataResultModel {
 		let helper = SignInGoogleHelper()
-		let tokens = try await helper.signIn()
-		let authDataResult = try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
-		print("authDataResult.email: ", authDataResult.email ?? "???" )
+		do {
+			let tokens = try await helper.signIn()
+			return try await AuthenticationManager.shared.signInWithGoogle(tokens: tokens)
+		}
+		catch {
+			throw error
+		}
 	}
 	
-	func signInGitHub() async throws {
+	func signInGitHub() async throws -> AuthDataResultModel {
 		let helper = SignInGitHubHepler()
-		try await helper.signIn()
+		do {
+			return try await helper.signIn()
+		}
+		catch {
+			throw error
+		}
+		
 	}
 }
 
