@@ -18,6 +18,7 @@
 		602688412D71F7C800768C35 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 602688402D71F7C800768C35 /* FirebaseFirestore */; };
 		602688432D71FBAF00768C35 /* db.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602688422D71FBAF00768C35 /* db.swift */; };
 		602688452D72572F00768C35 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602688442D72572F00768C35 /* Diary.swift */; };
+		602688472D74867E00768C35 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 602688462D74867E00768C35 /* .gitignore */; };
 		609214A92D6CC56400677364 /* diary_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609214A82D6CC56400677364 /* diary_appApp.swift */; };
 		609214AB2D6CC56400677364 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609214AA2D6CC56400677364 /* ContentView.swift */; };
 		609214AD2D6CC56A00677364 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609214AC2D6CC56A00677364 /* Assets.xcassets */; };
@@ -33,6 +34,7 @@
 		6026882F2D70A98A00768C35 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		602688422D71FBAF00768C35 /* db.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = db.swift; sourceTree = "<group>"; };
 		602688442D72572F00768C35 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
+		602688462D74867E00768C35 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		609214A52D6CC56400677364 /* diary_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = diary_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		609214A82D6CC56400677364 /* diary_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = diary_appApp.swift; sourceTree = "<group>"; };
 		609214AA2D6CC56400677364 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				6026882F2D70A98A00768C35 /* AuthView.swift */,
 				602688422D71FBAF00768C35 /* db.swift */,
 				602688442D72572F00768C35 /* Diary.swift */,
+				602688462D74867E00768C35 /* .gitignore */,
 			);
 			path = diary_app;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				602688472D74867E00768C35 /* .gitignore in Resources */,
 				609214B02D6CC56A00677364 /* Preview Assets.xcassets in Resources */,
 				609214AD2D6CC56A00677364 /* Assets.xcassets in Resources */,
 				6026882C2D6FAE0000768C35 /* GoogleService-Info.plist in Resources */,

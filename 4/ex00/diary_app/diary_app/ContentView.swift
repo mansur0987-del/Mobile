@@ -79,13 +79,19 @@ struct MainLoginView : View {
 struct MainNotesList : View {
 	@Binding var IsMainView : Bool
 	@Binding var userData : AuthDataResultModel?
-	@State var IsShowNoteView : Bool = false
+	@State var IsShowAddNoteView : Bool = false
 	var body: some View {
 		VStack {
 			LogoutView(IsMainView: $IsMainView, userData: $userData)
-			NotesListView(userData: $userData, IsShowNoteView: $IsShowNoteView)
+			Text(userData?.email ?? "")
+				.font(.system(size: 20))
+				.padding(20)
+				.foregroundStyle(.white.secondary)
+				.background(.gray.tertiary)
+				.clipShape(RoundedRectangle(cornerRadius: 30))
+			NotesListView(userData: $userData, IsShowAddNoteView: $IsShowAddNoteView)
 			Spacer()
-			AddNoteView(IsShowNoteView: $IsShowNoteView, userData: $userData)
+			AddNoteView(IsShowAddNoteView: $IsShowAddNoteView, userData: $userData)
 		}
 		
 	}

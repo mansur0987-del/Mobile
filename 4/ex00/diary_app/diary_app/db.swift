@@ -32,14 +32,13 @@ final class FirebaseNote {
 	static let shared = FirebaseNote()
 	private init() { }
 	
-	func GetNotesList(ownerId: String) async throws -> [Note] {
+	func GetNotesList(email: String) async throws -> [Note] {
 		do {
 			let snapshot = try await db.collection("notes")
-				.whereField("ownerId", isEqualTo: ownerId)
+				.whereField("email", isEqualTo: email)
 				.order(by: "created", descending: true)
 				.getDocuments()
 			let notes: [Note] = snapshot.documents.compactMap { doc in
-				print(doc)
 				return try? doc.data(as: Note.self)
 			}
 			return notes

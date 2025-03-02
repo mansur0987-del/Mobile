@@ -29,13 +29,13 @@ struct GitHubSignInResultModel {
 
 struct AuthDataResultModel {
 	let uid: String
-	let email: String?
+	let email: String
 	let photoUrl: String?
 	let isAnonymous: Bool
 	
 	init(user: User) {
 		self.uid = user.uid
-		self.email = user.email != nil ? user.email : user.providerData.first as? String
+		self.email = (user.email != nil ? user.email : user.providerData.first!.email)!
 		self.photoUrl = user.photoURL?.absoluteString
 		self.isAnonymous = user.isAnonymous
 		
@@ -133,7 +133,7 @@ final class SignInGitHubHepler {
 	@MainActor
 	func signIn() async throws -> AuthDataResultModel {
 		let provider = OAuthProvider(providerID: "github.com")
-		provider.scopes = ["read:user", "user:email"]
+		provider.scopes = ["user"]
 		do {
 			// Получаем credential с помощью асинхронного вызова
 			let credential = try await getCredentialWithAsync(provider: provider)
@@ -142,14 +142,6 @@ final class SignInGitHubHepler {
 				throw URLError(.badServerResponse)
 			}
 			let authDataResult = try await Auth.auth().signIn(with: credential!)
-			print (authDataResult.user)
-			if authDataResult.additionalUserInfo != nil {
-				print (authDataResult.additionalUserInfo!.username ?? "default value")
-				print (authDataResult.additionalUserInfo!.profile ?? "default value")
-			}
-			
-			print(authDataResult.user.providerData)
-			
 			
 			return AuthDataResultModel(user: authDataResult.user)
 		} catch {
