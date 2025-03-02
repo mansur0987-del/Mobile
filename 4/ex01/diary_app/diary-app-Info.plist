@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleURLSchemes</key>
+	<string>com.googleusercontent.apps.1067011176693-a8t5v428tq6p4e668fsjl9smhs1nuisu</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Google Sign In</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.1067011176693-a8t5v428tq6p4e668fsjl9smhs1nuisu</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>GitHub Sign In</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app-1-1067011176693-ios-65de53be8960933a49edbc</string>
+			</array>
+		</dict>
+	</array>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>GIDClientID</key>
+	<string>1067011176693-a8t5v428tq6p4e668fsjl9smhs1nuisu.apps.googleusercontent.com</string>
+</dict>
+</plist>
