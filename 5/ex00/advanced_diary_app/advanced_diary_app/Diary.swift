@@ -14,10 +14,43 @@ struct NotesListView : View {
 	@State var IsShowNoteView : Bool = false
 	@State var idNoteShow: String?
 	@State var smiles = GetSmiles()
+	@State var IsCalendar : Bool = false
+	@State var selectedDate : Date = Date()
 	var body: some View {
-		ScrollView {
-			LastNotesView(notes: $notes, idNoteShow: $idNoteShow, IsShowNoteView: $IsShowNoteView)
-			PercantFeelingView(smiles: $smiles, notes: $notes)
+		if IsCalendar == false {
+			ScrollView {
+				LastNotesView(notes: $notes, idNoteShow: $idNoteShow, IsShowNoteView: $IsShowNoteView)
+				PercantFeelingView(smiles: $smiles, notes: $notes)
+			}
+			
+		}
+		else {
+			ScrollView {
+				CalendarView(selectedDate: $selectedDate)
+				DateNotesView(notes: $notes, idNoteShow: $idNoteShow, IsShowNoteView: $IsShowNoteView, selectedDate: $selectedDate)
+			}
+		}
+		HStack {
+			Button {
+				IsCalendar = false
+			} label: {
+				Image(systemName: "person.fill")
+					.font(.system(size: 20))
+					.foregroundStyle(.white.secondary)
+					.padding(15)
+					.background(.blue.secondary)
+					.cornerRadius(30)
+			}
+			Button {
+				IsCalendar = true
+			} label: {
+				Image(systemName: "calendar")
+					.font(.system(size: 20))
+					.foregroundStyle(.white.secondary)
+					.padding(15)
+					.background(.blue.secondary)
+					.cornerRadius(30)
+			}
 		}
 		.task {
 			do {
@@ -107,7 +140,6 @@ struct LastNotesView : View {
 				Text(el.title)
 					.padding()
 			}
-			.padding()
 			.background(.gray.tertiary)
 			.clipShape(RoundedRectangle(cornerRadius: 30))
 			.onTapGesture {
@@ -119,3 +151,45 @@ struct LastNotesView : View {
 }
 
 
+struct CalendarView: View {
+	@Binding var selectedDate : Date
+	
+	var body: some View {
+		DatePicker("Select date", selection: $selectedDate, displayedComponents: .date)
+			.datePickerStyle(.graphical)
+			.scaleEffect(0.5)
+			.compositingGroup()
+			.frame(maxHeight: 200)
+			.background(.gray.tertiary)
+			.clipShape(RoundedRectangle(cornerRadius: 30))
+	}
+}
+
+struct DateNotesView : View {
+	var smiles = GetSmiles()
+	@Binding var notes : [Note]
+	@Binding var idNoteShow: String?
+	@Binding var IsShowNoteView: Bool
+	@Binding var selectedDate : Date
+	var body: some View {
+		ForEach(notes, id: \.self.id) { el in
+			if (el.created.string(format: "dd-MM-yyyy") == selectedDate.string(format: "dd-MM-yyyy")) {
+				HStack {
+					Image(smiles[el.feeling].imgName)
+						.resizable()
+						.frame(width: 30, height: 30)
+						.background(smiles[el.feeling].color)
+						.clipShape(RoundedRectangle(cornerRadius: 30))
+					Text(el.title)
+						.padding()
+				}
+				.background(.gray.tertiary)
+				.clipShape(RoundedRectangle(cornerRadius: 30))
+				.onTapGesture {
+					idNoteShow = el.id
+					IsShowNoteView.toggle()
+				}
+			}
+		}
+	}
+}

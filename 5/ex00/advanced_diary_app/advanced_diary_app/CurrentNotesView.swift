@@ -30,7 +30,6 @@ func SumPercant(smiles : [Smile], notes: [Note]) -> [Smile] {
 		while (i < smiles.count) {
 			let feelSum = Double(notes.filter({ note in note.feeling == smiles[i].id }).count)
 			let percant : Double = feelSum / Double(notes.count) * 100
-			print("percant: ", percant)
 			let newSmile = Smile(id: smiles[i].id,
 								 imgName: smiles[i].imgName,
 								 color: smiles[i].color,
