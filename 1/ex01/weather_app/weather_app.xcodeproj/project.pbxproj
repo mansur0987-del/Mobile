@@ -7,22 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		60D4F2482D63B20E00A3C600 /* weather_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4F2472D63B20E00A3C600 /* weather_appApp.swift */; };
-		60D4F24A2D63B20E00A3C600 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D4F2492D63B20E00A3C600 /* ContentView.swift */; };
-		60D4F24C2D63B21300A3C600 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60D4F24B2D63B21300A3C600 /* Assets.xcassets */; };
-		60D4F24F2D63B21300A3C600 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60D4F24E2D63B21300A3C600 /* Preview Assets.xcassets */; };
+		602851B42DE35BDA008A3CD5 /* weather_appApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602851B32DE35BDA008A3CD5 /* weather_appApp.swift */; };
+		602851B62DE35BDA008A3CD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602851B52DE35BDA008A3CD5 /* ContentView.swift */; };
+		602851B82DE35BDE008A3CD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 602851B72DE35BDE008A3CD5 /* Assets.xcassets */; };
+		602851BB2DE35BDE008A3CD5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 602851BA2DE35BDE008A3CD5 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		60D4F2442D63B20E00A3C600 /* weather_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weather_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		60D4F2472D63B20E00A3C600 /* weather_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weather_appApp.swift; sourceTree = "<group>"; };
-		60D4F2492D63B20E00A3C600 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		60D4F24B2D63B21300A3C600 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		60D4F24E2D63B21300A3C600 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		602851B02DE35BDA008A3CD5 /* weather_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = weather_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		602851B32DE35BDA008A3CD5 /* weather_appApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = weather_appApp.swift; sourceTree = "<group>"; };
+		602851B52DE35BDA008A3CD5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		602851B72DE35BDE008A3CD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		602851BA2DE35BDE008A3CD5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		60D4F2412D63B20E00A3C600 /* Frameworks */ = {
+		602851AD2DE35BDA008A3CD5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -32,37 +32,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		60D4F23B2D63B20E00A3C600 = {
+		602851A72DE35BDA008A3CD5 = {
 			isa = PBXGroup;
 			children = (
-				60D4F2462D63B20E00A3C600 /* weather_app */,
-				60D4F2452D63B20E00A3C600 /* Products */,
+				602851B22DE35BDA008A3CD5 /* weather_app */,
+				602851B12DE35BDA008A3CD5 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		60D4F2452D63B20E00A3C600 /* Products */ = {
+		602851B12DE35BDA008A3CD5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				60D4F2442D63B20E00A3C600 /* weather_app.app */,
+				602851B02DE35BDA008A3CD5 /* weather_app.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		60D4F2462D63B20E00A3C600 /* weather_app */ = {
+		602851B22DE35BDA008A3CD5 /* weather_app */ = {
 			isa = PBXGroup;
 			children = (
-				60D4F2472D63B20E00A3C600 /* weather_appApp.swift */,
-				60D4F2492D63B20E00A3C600 /* ContentView.swift */,
-				60D4F24B2D63B21300A3C600 /* Assets.xcassets */,
-				60D4F24D2D63B21300A3C600 /* Preview Content */,
+				602851B32DE35BDA008A3CD5 /* weather_appApp.swift */,
+				602851B52DE35BDA008A3CD5 /* ContentView.swift */,
+				602851B72DE35BDE008A3CD5 /* Assets.xcassets */,
+				602851B92DE35BDE008A3CD5 /* Preview Content */,
 			);
 			path = weather_app;
 			sourceTree = "<group>";
 		};
-		60D4F24D2D63B21300A3C600 /* Preview Content */ = {
+		602851B92DE35BDE008A3CD5 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				60D4F24E2D63B21300A3C600 /* Preview Assets.xcassets */,
+				602851BA2DE35BDE008A3CD5 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -70,13 +70,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		60D4F2432D63B20E00A3C600 /* weather_app */ = {
+		602851AF2DE35BDA008A3CD5 /* weather_app */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 60D4F2522D63B21300A3C600 /* Build configuration list for PBXNativeTarget "weather_app" */;
+			buildConfigurationList = 602851BE2DE35BDE008A3CD5 /* Build configuration list for PBXNativeTarget "weather_app" */;
 			buildPhases = (
-				60D4F2402D63B20E00A3C600 /* Sources */,
-				60D4F2412D63B20E00A3C600 /* Frameworks */,
-				60D4F2422D63B20E00A3C600 /* Resources */,
+				602851AC2DE35BDA008A3CD5 /* Sources */,
+				602851AD2DE35BDA008A3CD5 /* Frameworks */,
+				602851AE2DE35BDA008A3CD5 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -84,25 +84,25 @@
 			);
 			name = weather_app;
 			productName = weather_app;
-			productReference = 60D4F2442D63B20E00A3C600 /* weather_app.app */;
+			productReference = 602851B02DE35BDA008A3CD5 /* weather_app.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		60D4F23C2D63B20E00A3C600 /* Project object */ = {
+		602851A82DE35BDA008A3CD5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
-					60D4F2432D63B20E00A3C600 = {
+					602851AF2DE35BDA008A3CD5 = {
 						CreatedOnToolsVersion = 15.4;
 					};
 				};
 			};
-			buildConfigurationList = 60D4F23F2D63B20E00A3C600 /* Build configuration list for PBXProject "weather_app" */;
+			buildConfigurationList = 602851AB2DE35BDA008A3CD5 /* Build configuration list for PBXProject "weather_app" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,42 +110,42 @@
 				en,
 				Base,
 			);
-			mainGroup = 60D4F23B2D63B20E00A3C600;
-			productRefGroup = 60D4F2452D63B20E00A3C600 /* Products */;
+			mainGroup = 602851A72DE35BDA008A3CD5;
+			productRefGroup = 602851B12DE35BDA008A3CD5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				60D4F2432D63B20E00A3C600 /* weather_app */,
+				602851AF2DE35BDA008A3CD5 /* weather_app */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		60D4F2422D63B20E00A3C600 /* Resources */ = {
+		602851AE2DE35BDA008A3CD5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60D4F24F2D63B21300A3C600 /* Preview Assets.xcassets in Resources */,
-				60D4F24C2D63B21300A3C600 /* Assets.xcassets in Resources */,
+				602851BB2DE35BDE008A3CD5 /* Preview Assets.xcassets in Resources */,
+				602851B82DE35BDE008A3CD5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		60D4F2402D63B20E00A3C600 /* Sources */ = {
+		602851AC2DE35BDA008A3CD5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60D4F24A2D63B20E00A3C600 /* ContentView.swift in Sources */,
-				60D4F2482D63B20E00A3C600 /* weather_appApp.swift in Sources */,
+				602851B62DE35BDA008A3CD5 /* ContentView.swift in Sources */,
+				602851B42DE35BDA008A3CD5 /* weather_appApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		60D4F2502D63B21300A3C600 /* Debug */ = {
+		602851BC2DE35BDE008A3CD5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -208,7 +208,7 @@
 			};
 			name = Debug;
 		};
-		60D4F2512D63B21300A3C600 /* Release */ = {
+		602851BD2DE35BDE008A3CD5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -264,7 +264,7 @@
 			};
 			name = Release;
 		};
-		60D4F2532D63B21300A3C600 /* Debug */ = {
+		602851BF2DE35BDE008A3CD5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -292,7 +292,7 @@
 			};
 			name = Debug;
 		};
-		60D4F2542D63B21300A3C600 /* Release */ = {
+		602851C02DE35BDE008A3CD5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -323,25 +323,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		60D4F23F2D63B20E00A3C600 /* Build configuration list for PBXProject "weather_app" */ = {
+		602851AB2DE35BDA008A3CD5 /* Build configuration list for PBXProject "weather_app" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				60D4F2502D63B21300A3C600 /* Debug */,
-				60D4F2512D63B21300A3C600 /* Release */,
+				602851BC2DE35BDE008A3CD5 /* Debug */,
+				602851BD2DE35BDE008A3CD5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		60D4F2522D63B21300A3C600 /* Build configuration list for PBXNativeTarget "weather_app" */ = {
+		602851BE2DE35BDE008A3CD5 /* Build configuration list for PBXNativeTarget "weather_app" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				60D4F2532D63B21300A3C600 /* Debug */,
-				60D4F2542D63B21300A3C600 /* Release */,
+				602851BF2DE35BDE008A3CD5 /* Debug */,
+				602851C02DE35BDE008A3CD5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 60D4F23C2D63B20E00A3C600 /* Project object */;
+	rootObject = 602851A82DE35BDA008A3CD5 /* Project object */;
 }

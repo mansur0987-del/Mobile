@@ -14,7 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		60830B942D5F1F8E001A2367 /* ex03.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ex03.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		60830B942D5F1F8E001A2367 /* calculator_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calculator_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60830B972D5F1F8E001A2367 /* ex03App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ex03App.swift; sourceTree = "<group>"; };
 		60830B992D5F1F8E001A2367 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		60830B9B2D5F1F91001A2367 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -35,7 +35,7 @@
 		60830B8B2D5F1F8E001A2367 = {
 			isa = PBXGroup;
 			children = (
-				60830B962D5F1F8E001A2367 /* ex03 */,
+				60830B962D5F1F8E001A2367 /* calculator_app */,
 				60830B952D5F1F8E001A2367 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,12 +43,12 @@
 		60830B952D5F1F8E001A2367 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				60830B942D5F1F8E001A2367 /* ex03.app */,
+				60830B942D5F1F8E001A2367 /* calculator_app.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		60830B962D5F1F8E001A2367 /* ex03 */ = {
+		60830B962D5F1F8E001A2367 /* calculator_app */ = {
 			isa = PBXGroup;
 			children = (
 				60830B972D5F1F8E001A2367 /* ex03App.swift */,
@@ -56,7 +56,7 @@
 				60830B9B2D5F1F91001A2367 /* Assets.xcassets */,
 				60830B9D2D5F1F91001A2367 /* Preview Content */,
 			);
-			path = ex03;
+			path = calculator_app;
 			sourceTree = "<group>";
 		};
 		60830B9D2D5F1F91001A2367 /* Preview Content */ = {
@@ -70,9 +70,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		60830B932D5F1F8E001A2367 /* ex03 */ = {
+		60830B932D5F1F8E001A2367 /* calculator_app */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 60830BA22D5F1F91001A2367 /* Build configuration list for PBXNativeTarget "ex03" */;
+			buildConfigurationList = 60830BA22D5F1F91001A2367 /* Build configuration list for PBXNativeTarget "calculator_app" */;
 			buildPhases = (
 				60830B902D5F1F8E001A2367 /* Sources */,
 				60830B912D5F1F8E001A2367 /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = ex03;
+			name = calculator_app;
 			productName = ex03;
-			productReference = 60830B942D5F1F8E001A2367 /* ex03.app */;
+			productReference = 60830B942D5F1F8E001A2367 /* calculator_app.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -103,7 +103,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 60830B8F2D5F1F8E001A2367 /* Build configuration list for PBXProject "ex03" */;
+			buildConfigurationList = 60830B8F2D5F1F8E001A2367 /* Build configuration list for PBXProject "calculator_app" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -116,7 +116,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				60830B932D5F1F8E001A2367 /* ex03 */,
+				60830B932D5F1F8E001A2367 /* calculator_app */,
 			);
 		};
 /* End PBXProject section */
@@ -273,7 +273,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ex03/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"calculator_app/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -303,7 +303,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ex03/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"calculator_app/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -327,7 +327,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		60830B8F2D5F1F8E001A2367 /* Build configuration list for PBXProject "ex03" */ = {
+		60830B8F2D5F1F8E001A2367 /* Build configuration list for PBXProject "calculator_app" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60830BA02D5F1F91001A2367 /* Debug */,
@@ -336,7 +336,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		60830BA22D5F1F91001A2367 /* Build configuration list for PBXNativeTarget "ex03" */ = {
+		60830BA22D5F1F91001A2367 /* Build configuration list for PBXNativeTarget "calculator_app" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				60830BA32D5F1F91001A2367 /* Debug */,
