@@ -10,7 +10,7 @@ import CoreLocation
 
 struct ContentView: View {
 	@StateObject var locationManager = LocationManager()
-	@State var location : Location = Location(IsGPS: false, IsErrorGPS: false, IsErrorSearch: false)
+	@State var location : Location = Location(IsGPS: true, IsErrorGPS: false, IsErrorSearch: false)
 	@State var IdActiveButton : Int = 0
 	var content = [Content(id: 0, content: "Currently"),
 				Content(id: 1, content: "Today"),
