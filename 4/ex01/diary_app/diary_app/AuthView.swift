@@ -40,7 +40,7 @@ struct AuthView : View {
 				Task {
 					do {
 						userData = try await viewModel.signInGitHub()
-						print("userData:", userData)
+						print("userData:", userData!)
 						IsAuthView = false
 						IsMainView = true
 					} catch {
