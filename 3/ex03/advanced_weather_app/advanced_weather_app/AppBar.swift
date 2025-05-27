@@ -41,11 +41,15 @@ struct SearchField: View {
 			.background(Color.gray.tertiary)
 			.clipShape(RoundedRectangle(cornerRadius: 30))
 			.onChange(of: location.location) { oldValue, newValue in
-				if newValue.count > 0 {
+				if newValue.count > 2 {
 					Task {
 						do {
 							location.errorSearch = ""
-							options = try await network.Search(line: newValue)
+							try await withTimeout(seconds: 10) {
+								try await Task.sleep(nanoseconds: 3 * 1_000_000_00)
+								options = try await network.Search(line: newValue)
+							}
+							
 						}
 						catch {
 							location.errorSearch = "Network error. Check internet connection"
